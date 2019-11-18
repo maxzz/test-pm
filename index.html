@@ -47,9 +47,24 @@
                 </div>
             </form>
 
-            <!-- <button v-on:click="eventParent">Clique me to emit from parent component</button>
+            <test-form></test-form>
+
+            <script type="text/x-template" id="test-template">
+                <form class="pc-form">
+                    {{name}}
+                    <input type="password" placeholder="password current">
+                    <input type="password" placeholder="password new">
+                    <input type="password" placeholder="password confirm">
+                    <div class="pc__buttons">
+                        <button>Fill values</button>
+                        <button>Clear values</button>
+                    </div>
+                </form>
+            </script>
+
+            <button v-on:click="eventParent">Clique me to emit from parent component</button>
             <br />
-            <child v-on:event_child="eventChild"></child> -->
+            <child v-on:event_child="eventChild"></child>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="./src/index.js"></script>

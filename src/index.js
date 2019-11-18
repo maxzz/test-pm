@@ -11,6 +11,19 @@ Vue.component('child', {
     }
 });
 
+Vue.component('test-form', {
+    template: '#test-template',
+    data: () => {
+        return {
+            name: '',
+        };
+    },
+    mounted() {
+        this.name = 'aaa';
+        console.log('mo');
+    },
+});
+
 var vm = new Vue({
     el: '#app',
     created() {
