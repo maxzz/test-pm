@@ -11,68 +11,77 @@ Vue.component('child', {
     }
 });
 
-const formsData = [
-    {
-        formName: 'name',
+const formsData = {
+    formA: {
+        label: 'Password Change 1',
         fields: [
             {
-                attrs: {
-                    type: 'password',
-                    placeholder: "password current",
-                }
+                type: 'password',
+                placeholder: "password new",
             },
             {
-                attrs: {
-                    type: 'password',
-                    placeholder: "password current",
-                }
-            },
-            {
-                attrs: {
-                    type: 'password',
-                    placeholder: "password current",
-                }
+                type: 'password',
+                placeholder: "password confirm",
             },
         ]
-    }
-];
+    },
+    formB: {
+        label: 'Password Change 2',
+        fields: [
+            {
+                type: 'password',
+                placeholder: "password current",
+            },
+            {
+                type: 'password',
+                placeholder: "password new",
+            },
+        ]
+    },
+    formC: {
+        label: 'Password Change 3',
+        fields: [
+            {
+                type: 'password',
+                placeholder: "password current",
+            },
+            {
+                type: 'password',
+                placeholder: "password new",
+            },
+            {
+                type: 'password',
+                placeholder: "password confirm",
+            },
+        ]
+    },
+};
 
 Vue.component('test-form', {
     template: '#test-template',
     data: function() {
         return {
+            formId: '',
             name: '',
         };
     },
     mounted() {
-        this.name = 'aaa';
-        console.log('mo', this.$el);
-
-        this.addField({
-            type: 'password',
-            placeholder: "password current",
-        });
-        this.addField({
-            type: 'password',
-            placeholder: "password new",
-        });
-        this.addField({
-            type: 'password',
-            placeholder: "password confirm",
-        });
+        this.formId = this.$el.dataset['formId'];
+        
+        let form = formsData[this.formId];
+        this.name = form.label;
+        form.fields.forEach(_ => this.addField(_));
     },
     methods: {
         addField(attrs) {
-            let all = [...this.$el.querySelectorAll('input')];
-            let last = all[all.length - 1] ? all[all.length - 1].nextElementSibling : this.$el.firstElementChild;
+            let formEl = this.$el.querySelector('form');
+            let all = [...formEl.querySelectorAll('input')];
+            let last = all[all.length - 1] ? all[all.length - 1].nextElementSibling : formEl.firstElementChild;
 
             let el = document.createElement('input');
-            this.setAttrs(el, attrs);
-            this.$el.insertBefore(el, last);
-        },
-        setAttrs(el, attrs) {
             Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
-        }
+            formEl.insertBefore(el, last);
+        },
     },
 });
 
