@@ -10,19 +10,23 @@
     <body>
         <script type="text/x-template" id="test-template">
             <div class="form-root">
-                <span class="label">{{name}}</span>
+                <span class="label">{{formLabel}}</span>
                 <form class="pc-form">
-                    <div class="form-fields"></div>
-                        <div class="pc__buttons">
-                            <div>
-                                <button @click.prevent="clearValues">Clear</button>
-                                <button @click.prevent="fillValues">Fill-in</button>
-                            </div>
+                    <!-- <div style="height: 40px; background-color: red">
+                        <input type="text" style="width: 100%; border: none">
+                    </div> -->
+                    <div class="form-fields">
+                    </div>
+                    <div class="pc__buttons">
+                        <div>
+                            <button @click.prevent="clearValues">Clear</button>
+                            <button @click.prevent="fillValues">Fill-in</button>
                         </div>
+                    </div>
                     <div class="form-options">
                         <label><input type="checkbox" v-model="opt_hasUsername"> Add username field</label>
                         <label><input type="checkbox" v-model="opt_hasLogin"> Form has corresponding login</label>
-                        <label><input type="checkbox" v-model="opt_fillValid"> Fill with valid credentials</label>
+                        <label><input type="checkbox" v-model="opt_fillValid"> Fill-in with valid credentials</label>
                     </div>
                 </form>
             </div>

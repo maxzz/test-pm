@@ -67,7 +67,7 @@ Vue.component('test-form', {
     data: function() {
         return {
             formId: '',
-            name: '',
+            formLabel: '',
 
             opt_hasUsername: false,
             opt_hasLogin: false,
@@ -78,7 +78,7 @@ Vue.component('test-form', {
         this.formId = this.$el.dataset['formId'];
         
         let form = formsData[this.formId];
-        this.name = form.label;
+        this.formLabel = form.label;
         form.fields.forEach(_ => this.addField(_));
     },
     watch: {
@@ -90,18 +90,15 @@ Vue.component('test-form', {
     methods: {
         addUsername(add) {
             let formEl = this.$el.querySelector('.form-fields');
-            let all = [...formEl.querySelectorAll('input:not([type=checkbox])')];
-            let usernameEl = all && all[0];
-            if (usernameEl) {
-                !usernameEl.classList.contains('username') && (usernameEl = null);
-            }
+            let usernameEl = formEl.querySelector('.username');
             if (add) {
                 if (!usernameEl) {
                     let el = document.createElement('input');
                     setAttrs(el, {
                         type: 'text',
                         'class': 'username',
-                        placeholder: 'User name'
+                        placeholder: 'User name',
+                        value: 'maxzz'
 
                     });
                     formEl.insertBefore(el, formEl.firstElementChild);
