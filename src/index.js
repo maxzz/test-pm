@@ -11,16 +11,68 @@ Vue.component('child', {
     }
 });
 
+const formsData = [
+    {
+        formName: 'name',
+        fields: [
+            {
+                attrs: {
+                    type: 'password',
+                    placeholder: "password current",
+                }
+            },
+            {
+                attrs: {
+                    type: 'password',
+                    placeholder: "password current",
+                }
+            },
+            {
+                attrs: {
+                    type: 'password',
+                    placeholder: "password current",
+                }
+            },
+        ]
+    }
+];
+
 Vue.component('test-form', {
     template: '#test-template',
-    data: () => {
+    data: function() {
         return {
             name: '',
         };
     },
     mounted() {
         this.name = 'aaa';
-        console.log('mo');
+        console.log('mo', this.$el);
+
+        this.addField({
+            type: 'password',
+            placeholder: "password current",
+        });
+        this.addField({
+            type: 'password',
+            placeholder: "password new",
+        });
+        this.addField({
+            type: 'password',
+            placeholder: "password confirm",
+        });
+    },
+    methods: {
+        addField(attrs) {
+            let all = [...this.$el.querySelectorAll('input')];
+            let last = all[all.length - 1] ? all[all.length - 1].nextElementSibling : this.$el.firstElementChild;
+
+            let el = document.createElement('input');
+            this.setAttrs(el, attrs);
+            this.$el.insertBefore(el, last);
+        },
+        setAttrs(el, attrs) {
+            Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
+        }
     },
 });
 
