@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Password Change Test</title>
+    </head>
+    <body>
+        <div id="app">
+            <button v-on:click="eventParent">Clique me to emit from parent component</button>
+
+            <br /><br />
+
+            <child v-on:event_child="eventChild"></child>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./src/index.js"></script>
+    </body>
+</html>
