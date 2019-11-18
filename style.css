@@ -1,0 +1,22 @@
+.pc-form {
+    display: grid;
+    width: 15em;
+    padding: 1.4em .4em .4em;
+    margin-bottom: 1em;;
+    border: 1px dotted gray;
+    background-color: hsla(209, 100%, 86%, 0.561);
+}
+
+.pc-form input {
+    padding: .4em;
+}
+
+.pc-form button {
+    padding: .4em;
+}
+
+.pc__buttons {
+    margin: .4em 0 0;
+    display: grid;
+    justify-content: right;
+}

@@ -1,5 +1,9 @@
 Vue.component('child', {
-    template: '<div><button v-on:click="emit">Clique me to emit from child component</button></div>',
+    template: `
+        <div>
+            <button v-on:click="emit">Clique me to emit from child component</button>
+        </div>
+    `,
     methods: {
         emit: function() {
             this.$emit('event_child', 1);

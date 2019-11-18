@@ -5,14 +5,51 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Password Change Test</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="app">
-            <button v-on:click="eventParent">Clique me to emit from parent component</button>
 
-            <br /><br />
+            <form class="pc-form" data-form-name="login">
+                <input type="text" placeholder="username">
+                <input type="password" placeholder="password">
+                <div class="pc__buttons">
+                    <button>Fill values</button>
+                    <button>Clear values</button>
+                </div>
+            </form>
 
-            <child v-on:event_child="eventChild"></child>
+            <form class="pc-form">
+                <input type="password" placeholder="password new">
+                <input type="password" placeholder="password confirm">
+                <div class="pc__buttons">
+                    <button>Fill values</button>
+                    <button>Clear values</button>
+                </div>
+            </form>
+
+            <form class="pc-form">
+                <input type="password" placeholder="password current" name="current-password">
+                <input type="password" placeholder="password new">
+                <div class="pc__buttons">
+                    <button>Fill values</button>
+                    <button>Clear values</button>
+                </div>
+            </form>
+
+            <form class="pc-form">
+                <input type="password" placeholder="password current">
+                <input type="password" placeholder="password new">
+                <input type="password" placeholder="password confirm">
+                <div class="pc__buttons">
+                    <button>Fill values</button>
+                    <button>Clear values</button>
+                </div>
+            </form>
+
+            <!-- <button v-on:click="eventParent">Clique me to emit from parent component</button>
+            <br />
+            <child v-on:event_child="eventChild"></child> -->
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="./src/index.js"></script>
