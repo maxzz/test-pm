@@ -12,14 +12,17 @@
             <div class="form-root">
                 <span class="label">{{name}}</span>
                 <form class="pc-form">
-                        <div class="form-fields"></div>
+                    <div class="form-fields"></div>
                         <div class="pc__buttons">
-                        <button @click.prevent="fillValues">Fill values</button>
-                        <button @click.prevent="clearValues">Clear values</button>
-                    </div>
+                            <div>
+                                <button @click.prevent="clearValues">Clear</button>
+                                <button @click.prevent="fillValues">Fill-in</button>
+                            </div>
+                        </div>
                     <div class="form-options">
-                        <label><input type="checkbox"> User name</label>
-                        <label><input type="checkbox"> Creds</label>
+                        <label><input type="checkbox" v-model="opt_hasUsername"> Add username field</label>
+                        <label><input type="checkbox" v-model="opt_hasLogin"> Form has corresponding login</label>
+                        <label><input type="checkbox" v-model="opt_fillValid"> Fill with valid credentials</label>
                     </div>
                 </form>
             </div>

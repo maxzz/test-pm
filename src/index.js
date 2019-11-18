@@ -58,12 +58,20 @@ const formsData = {
     },
 };
 
+function setAttrs(el, attrs) {
+    Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
+}
+
 Vue.component('test-form', {
     template: '#test-template',
     data: function() {
         return {
             formId: '',
             name: '',
+
+            opt_hasUsername: false,
+            opt_hasLogin: false,
+            opt_fillValid: true,
         };
     },
     mounted() {
@@ -73,20 +81,50 @@ Vue.component('test-form', {
         this.name = form.label;
         form.fields.forEach(_ => this.addField(_));
     },
+    watch: {
+        opt_hasUsername: function(value) {
+            console.log('value', value);
+            this.addUsername(value);
+        }
+    },
     methods: {
+        addUsername(add) {
+            let formEl = this.$el.querySelector('.form-fields');
+            let all = [...formEl.querySelectorAll('input:not([type=checkbox])')];
+            let usernameEl = all && all[0];
+            if (usernameEl) {
+                !usernameEl.classList.contains('username') && (usernameEl = null);
+            }
+            if (add) {
+                if (!usernameEl) {
+                    let el = document.createElement('input');
+                    setAttrs(el, {
+                        type: 'text',
+                        'class': 'username',
+                        placeholder: 'User name'
+
+                    });
+                    formEl.insertBefore(el, formEl.firstElementChild);
+                }
+            } else {
+                if (usernameEl) {
+                    formEl.removeChild(usernameEl);
+                }
+            }
+        },
         addField(attrs) {
-            let formEl = this.$el.querySelector('form');
+            let formEl = this.$el.querySelector('.form-fields');
             let all = [...formEl.querySelectorAll('input:not([type=checkbox])')];
             let last = all[all.length - 1] ? all[all.length - 1].nextElementSibling : formEl.firstElementChild;
 
             let el = document.createElement('input');
-            Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
+            setAttrs(el, attrs);
             formEl.insertBefore(el, last);
         },
         fillValues() {
             let all = [...this.$el.querySelectorAll('input')];
-            all.forEach(_ => {
-                _.value = 'aaaa';
+            all.forEach((_, index) => {
+                _.value = `____ ${index} ____`;
             });
         },
         clearValues() {

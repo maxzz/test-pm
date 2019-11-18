@@ -29,11 +29,11 @@ body {
     background-color: hsla(209, 100%, 86%, 0.561);
 }
 
-.pc-form input {
-    padding: .4em;
+.form-fields {
+    display: grid;
 }
 
-.pc-form button {
+.form-fields input {
     padding: .4em;
 }
 
@@ -43,9 +43,14 @@ body {
     justify-content: right;
 }
 
+.pc__buttons button {
+    padding: .4em;
+}
+
 .form-options {
-    margin-top: 1em;
-    border-top: 1px solid red;
+    margin-top: .4em;
+    padding-top: .2em;
+    border-top: 1px solid hsla(210, 23%, 59%, 0.5);
 }
 
 .form-options label {
