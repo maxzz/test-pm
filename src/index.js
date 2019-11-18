@@ -13,45 +13,46 @@ Vue.component('child', {
 
 const formsData = {
     formA: {
-        label: 'Password Change 1',
+        label: 'Change: New+New',
         fields: [
             {
                 type: 'password',
-                placeholder: "password new",
+                placeholder: "Password New",
             },
             {
                 type: 'password',
-                placeholder: "password confirm",
+                placeholder: "Password Confirm",
             },
         ]
     },
     formB: {
-        label: 'Password Change 2',
+        label: 'Change: Cur+New',
         fields: [
             {
                 type: 'password',
-                placeholder: "password current",
+                placeholder: "Password Current",
+                name: 'current-password',
             },
             {
                 type: 'password',
-                placeholder: "password new",
+                placeholder: "Password New",
             },
         ]
     },
     formC: {
-        label: 'Password Change 3',
+        label: 'Change Cur+New+New',
         fields: [
             {
                 type: 'password',
-                placeholder: "password current",
+                placeholder: "Password Current",
             },
             {
                 type: 'password',
-                placeholder: "password new",
+                placeholder: "Password New",
             },
             {
                 type: 'password',
-                placeholder: "password confirm",
+                placeholder: "Password Confirm",
             },
         ]
     },
@@ -75,12 +76,24 @@ Vue.component('test-form', {
     methods: {
         addField(attrs) {
             let formEl = this.$el.querySelector('form');
-            let all = [...formEl.querySelectorAll('input')];
+            let all = [...formEl.querySelectorAll('input:not([type=checkbox])')];
             let last = all[all.length - 1] ? all[all.length - 1].nextElementSibling : formEl.firstElementChild;
 
             let el = document.createElement('input');
             Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
             formEl.insertBefore(el, last);
+        },
+        fillValues() {
+            let all = [...this.$el.querySelectorAll('input')];
+            all.forEach(_ => {
+                _.value = 'aaaa';
+            });
+        },
+        clearValues() {
+            let all = [...this.$el.querySelectorAll('input')];
+            all.forEach(_ => {
+                _.value = '';
+            });
         },
     },
 });
