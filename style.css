@@ -29,11 +29,17 @@ body {
     background-color: hsla(209, 100%, 86%, 0.561);
 }
 
+.form-username {
+    height: 1.6em;
+    display: grid;
+    padding-bottom: 1em;
+}
+
 .form-fields {
     display: grid;
 }
 
-.form-fields input {
+input[type=text], input[type=password] {
     padding: .4em;
 }
 
@@ -58,4 +64,5 @@ body {
     grid-template-columns: auto 1fr;
     align-items: center;
     font-size: .8em;
+    user-select: none;
 }

@@ -18,10 +18,12 @@ const formsData = {
             {
                 type: 'password',
                 placeholder: "Password New",
+                'data-ftype': 1 // new
             },
             {
                 type: 'password',
                 placeholder: "Password Confirm",
+                'data-ftype': 1 // new
             },
         ]
     },
@@ -32,10 +34,12 @@ const formsData = {
                 type: 'password',
                 placeholder: "Password Current",
                 name: 'current-password',
+                'data-ftype': 0 // old
             },
             {
                 type: 'password',
                 placeholder: "Password New",
+                'data-ftype': 1 // new
             },
         ]
     },
@@ -45,14 +49,17 @@ const formsData = {
             {
                 type: 'password',
                 placeholder: "Password Current",
+                'data-ftype': 0 // old
             },
             {
                 type: 'password',
                 placeholder: "Password New",
+                'data-ftype': 1 // new
             },
             {
                 type: 'password',
                 placeholder: "Password Confirm",
+                'data-ftype': 1 // new
             },
         ]
     },
@@ -71,7 +78,9 @@ Vue.component('test-form', {
 
             opt_hasUsername: false,
             opt_hasLogin: false,
-            opt_fillValid: true,
+            opt_fillInvalid: true,
+
+            fillin: [] // fill-values: 0 - old; 1 - new
         };
     },
     mounted() {
@@ -80,16 +89,17 @@ Vue.component('test-form', {
         let form = formsData[this.formId];
         this.formLabel = form.label;
         form.fields.forEach(_ => this.addField(_));
+
+        this.fillin = form.fields.map(_ => _['data-ftype']);
     },
     watch: {
         opt_hasUsername: function(value) {
-            console.log('value', value);
             this.addUsername(value);
         }
     },
     methods: {
         addUsername(add) {
-            let formEl = this.$el.querySelector('.form-fields');
+            let formEl = this.$el.querySelector('.form-username');
             let usernameEl = formEl.querySelector('.username');
             if (add) {
                 if (!usernameEl) {
@@ -119,13 +129,13 @@ Vue.component('test-form', {
             formEl.insertBefore(el, last);
         },
         fillValues() {
-            let all = [...this.$el.querySelectorAll('input')];
+            let all = [...this.$el.querySelectorAll('.form-fields input')];
             all.forEach((_, index) => {
-                _.value = `____ ${index} ____`;
+                _.value = `____ ${this.fillin[index]} ____`;
             });
         },
         clearValues() {
-            let all = [...this.$el.querySelectorAll('input')];
+            let all = [...this.$el.querySelectorAll('.form-fields input')];
             all.forEach(_ => {
                 _.value = '';
             });
