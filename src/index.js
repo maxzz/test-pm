@@ -77,8 +77,8 @@ Vue.component('test-form', {
             formLabel: '',
 
             opt_hasUsername: false,
-            opt_hasLogin: false,
-            opt_fillInvalid: true,
+            opt_hasLogin: true,
+            opt_fillInvalid: false,
 
             fillin: [] // fill-values: 0 - old; 1 - new
         };
@@ -139,6 +139,34 @@ Vue.component('test-form', {
             all.forEach(_ => {
                 _.value = '';
             });
+        },
+    },
+});
+
+Vue.component('hidden-data-form', {
+    template: '#hidden-data-form',
+    data: () => {
+        return {
+            test: 'test',
+            fields: [
+                {
+                    value: 'test 1',
+                    password: false,
+                },
+                {
+                    value: 'test 2',
+                    password: true,
+                },
+                {
+                    value: 'test 3',
+                    password: false,
+                },
+            ]
+        };
+    },
+    methods: {
+        onAddField() {
+            console.log('add');
         },
     },
 });

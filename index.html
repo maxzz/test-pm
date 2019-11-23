@@ -4,12 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Password Change Test</title>
+        <title>Password Change Test v 1.0</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <script type="text/x-template" id="test-template">
-            <div class="form-root">
+            <div class="pc-form__container">
                 <span class="label">{{formLabel}}</span>
                 <form class="pc-form">
                     <div class="form-username"></div>
@@ -28,24 +28,38 @@
                 </form>
             </div>
         </script>
+
+        <script type="text/x-template" id="hidden-data-form">
+            <form class="data-form">
+                <div class="data-form__label">
+                    <span>PM Test Data</span>
+                    <input type="text" value="for-dp" tabIndex="-1" />
+                    <input type="password" value="for-dp2" tabIndex="-1" />
+                </div>
+                <button @click.prevent="onAddField" class="data-form__add" tabIndex="-1">+</button>
+                <div class="pm-test-data">
+                    <div class="pm-test-data__row" v-for="(field, index) of fields" :key="index">
+                        <input type="text" v-model="field.value" />
+                        <label><input type="checkbox" v-model="field.password" tabIndex="-1">Password</label>
+                    </div>
+                </div>
+            </form>
+        </script>
     
         <div id="app">
-            <!-- <form class="pc-form" data-form-name="login">
-                <input type="text" placeholder="username">
-                <input type="password" placeholder="password">
-                <div class="pc__buttons">
-                    <button>Fill values</button>
-                    <button>Clear values</button>
-                </div>
-            </form> -->
-
-            <test-form data-form-id="formA"></test-form>
-            <test-form data-form-id="formB"></test-form>
-            <test-form data-form-id="formC"></test-form>
+            <div class="main-forms">
+                <test-form data-form-id="formA"></test-form>
+                <test-form data-form-id="formB"></test-form>
+                <test-form data-form-id="formC"></test-form>
+            </div>
 
             <!-- <button v-on:click="eventParent">Clique me to emit from parent component</button>
             <br />
             <child v-on:event_child="eventChild"></child> -->
+
+            <div class="data-forms">
+                <hidden-data-form></hidden-data-form>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
