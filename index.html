@@ -38,7 +38,7 @@
                 </div>
                 <button @click.prevent="onAddField" class="data-form__add" tabIndex="-1">+</button>
                 <div class="pm-test-data">
-                    <div class="pm-test-data__row" v-for="(field, index) of fields" :key="index">
+                    <div class="pm-test-data__row" v-for="(field, index) of fields" :key="field.idx">
                         <input type="text" v-model="field.value" />
                         <label><input type="checkbox" v-model="field.password" tabIndex="-1">Password</label>
                     </div>

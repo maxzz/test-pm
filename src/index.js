@@ -148,27 +148,52 @@ Vue.component('hidden-data-form', {
     data: () => {
         return {
             test: 'test',
-            fields: [
+            lastIndex: 0,
+            fields: []
+        };
+    },
+    created() {
+        this.fields = this.loadFields();
+    },
+    methods: {
+        loadFields() {
+            return [
                 {
                     value: 'test 1',
                     password: false,
+                    idx: 0,
                 },
                 {
                     value: 'test 2',
                     password: true,
+                    idx: 1,
                 },
                 {
                     value: 'test 3',
                     password: false,
+                    idx: 2,
                 },
-            ]
-        };
-    },
-    methods: {
+            ];
+        },
+        saveField() {
+            let cnt = JSON.stringify(this.fields);
+            localStorage.setItem('ps-test-data', cnt);
+        },
         onAddField() {
             console.log('add');
         },
     },
+    watch: {
+        // fields: function(val) {
+        //     console.log('fields', val);
+        // }
+        fields: {
+            handler(newVal, oldVal) {
+                console.log('fields handler', newVal, oldVal);
+            },
+            deep: true
+        }
+    }
 });
 
 var vm = new Vue({
