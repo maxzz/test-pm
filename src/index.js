@@ -32,6 +32,7 @@ const formsData = {
             {
                 type: 'hidden',
                 name: 'username',
+                autocomplete: 'username',
                 value: 'maxzz',
                 'data-ftype': -1
             },
@@ -107,6 +108,8 @@ Vue.component('test-form', {
             formId: '',
             formLabel: '',
 
+            field_username: '',
+
             opt_hasUsername: false,
             opt_hasLogin: true,
             opt_fillInvalid: false,
@@ -119,38 +122,15 @@ Vue.component('test-form', {
         
         let form = formsData[this.formId];
         this.formLabel = form.label;
-        form.fields.forEach(_ => this.addField(_));
+        form.fields.forEach(this.addField);
 
         this.fillin = form.fields.map(_ => _['data-ftype']);
     },
     watch: {
         opt_hasUsername: function(value) {
-            this.addFormUsername(value);
         }
     },
     methods: {
-        addFormUsername(add) {
-            let formEl = this.$el.querySelector('.form-username');
-            let usernameEl = formEl.querySelector('.username');
-            if (add) {
-                if (!usernameEl) {
-                    let el = document.createElement('input');
-                    setAttrs(el, {
-                        type: 'text',
-                        'class': 'username',
-                        placeholder: 'User name',
-                        'name': 'username-0',
-                        value: 'maxzz'
-
-                    });
-                    formEl.insertBefore(el, formEl.firstElementChild);
-                }
-            } else {
-                if (usernameEl) {
-                    formEl.removeChild(usernameEl);
-                }
-            }
-        },
         addField(attrs) {
             let formEl = this.$el.querySelector('.form-fields');
             let all = [...formEl.querySelectorAll('input:not([type=checkbox])')];
