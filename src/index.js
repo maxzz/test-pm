@@ -110,7 +110,6 @@ Vue.component('test-form', {
             formId: '',
             formLabel: '',
             loading: false,
-            showPsws: false,
 
             watching: {
                 field_username: '',
@@ -120,6 +119,7 @@ Vue.component('test-form', {
                     hasUsername: false,
                     hasLogin: true,
                     fillInvalid: false,
+                    showPsws: false,
                 },
             },
 
@@ -170,16 +170,13 @@ Vue.component('test-form', {
             localStorage.setItem(`${STORAGE_TESTFORM}-${this.formId}`, JSON.stringify(s));
         },
         fillValues() {
-            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = `____ ${this.fillin[index]} ____`));
+            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = `____ ${this.fillin[index] + (this.watching.options.fillInvalid ? index : 0)} ____`));
         },
         clearValues() {
             this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = ''));
         },
         fieldType(field) {
-            if (field.type === 'hidden') {
-                return 'hidden';
-            }
-            return this.showPsws ? 'text' : field.type;
+            return field.type === 'hidden' ? 'hidden' : this.watching.options.showPsws ? 'text' : field.type;
         },
     },
 });
