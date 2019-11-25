@@ -101,19 +101,27 @@ function setAttrs(el, attrs) {
     Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
 }
 
+const STORAGE_TESTFORM = 'd16-pchange-test-form';
+
 Vue.component('test-form', {
     template: '#test-template',
     data: function() {
         return {
             formId: '',
             formLabel: '',
+            loading: false,
+            showPsws: false,
 
-            field_username: '',
-            fields: [],
+            watching: {
+                field_username: '',
+                fields: [],
 
-            opt_hasUsername: false,
-            opt_hasLogin: true,
-            opt_fillInvalid: false,
+                options: {
+                    hasUsername: false,
+                    hasLogin: true,
+                    fillInvalid: false,
+                },
+            },
 
             fillin: [] // fill-values: 0 - old; 1 - new
         };
@@ -121,37 +129,57 @@ Vue.component('test-form', {
     mounted() {
         this.formId = this.$el.dataset['formId'];
 
-        let form = formsData[this.formId];
-        form.fields.forEach(_ => _.value = ''); // add value
-        this.fields = formsData[this.formId].fields;
-        this.formLabel = form.label;
-        this.fillin = form.fields.map(_ => _['data-ftype']);
+        let org = formsData[this.formId];
+        org.fields.forEach(_ => !_.value && (_.value = ''));
 
-        //form.fields.forEach(this.addField);
+        this.formLabel = org.label;
+        this.watching.fields = org.fields;
+        this.fillin = org.fields.map(_ => _['data-ftype']);
+
+        this.loading = true;
+        this.localStorageLoad();
     },
     watch: {
-        opt_hasUsername: function(value) {
+        watching: {
+            handler(value) {
+                if (this.loading) {
+                    this.loading = false;
+                } else {
+                    this.localStorageSave();
+                }
+            },
+            deep: true
         }
     },
     methods: {
-        /*
-        addField(attrs) {
-            let formEl = this.$el.querySelector('.form-fields');
-            let all = [...formEl.querySelectorAll('input:not([type=checkbox])')];
-            let last = all[all.length - 1] ? all[all.length - 1].nextElementSibling : formEl.firstElementChild;
-
-            let el = document.createElement('input');
-            setAttrs(el, attrs);
-            formEl.insertBefore(el, last);
+        localStorageLoad() {
+            let cnt = localStorage.getItem(`${STORAGE_TESTFORM}-${this.formId}`);
+            let s = cnt && JSON.parse(cnt);
+            if (s) {
+                this.watching.field_username = s.field_username;
+                this.watching.fields.map((_, index) => _.value = s.fields[index]),
+                this.watching.options = s.options;
+            }
         },
-        */
+        localStorageSave() {
+            let s = {
+                field_username: this.watching.field_username,
+                fields: this.watching.fields.map(_ => _.value),
+                options: this.watching.options,
+            };
+            localStorage.setItem(`${STORAGE_TESTFORM}-${this.formId}`, JSON.stringify(s));
+        },
         fillValues() {
-            let all = [...this.$el.querySelectorAll('.form-fields input')];
-            all.forEach((_, index) => _.value = `____ ${this.fillin[index]} ____`);
+            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = `____ ${this.fillin[index]} ____`));
         },
         clearValues() {
-            let all = [...this.$el.querySelectorAll('.form-fields input')];
-            all.forEach(_ => _.value = '');
+            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = ''));
+        },
+        fieldType(field) {
+            if (field.type === 'hidden') {
+                return 'hidden';
+            }
+            return this.showPsws ? 'text' : field.type;
         },
     },
 });

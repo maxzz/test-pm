@@ -67,6 +67,10 @@ input[type=text], input[type=password] {
     display: grid;
     justify-content: right;
 }
+.pc__buttons__reveal {
+    color: hsl(0, 0%, 70%);
+    font-size: 1em;
+}
 
 .pc__buttons button {
     padding: .4em;
