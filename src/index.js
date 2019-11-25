@@ -109,6 +109,7 @@ Vue.component('test-form', {
             formLabel: '',
 
             field_username: '',
+            fields: [],
 
             opt_hasUsername: false,
             opt_hasLogin: true,
@@ -119,18 +120,21 @@ Vue.component('test-form', {
     },
     mounted() {
         this.formId = this.$el.dataset['formId'];
-        
-        let form = formsData[this.formId];
-        this.formLabel = form.label;
-        form.fields.forEach(this.addField);
 
+        let form = formsData[this.formId];
+        form.fields.forEach(_ => _.value = ''); // add value
+        this.fields = formsData[this.formId].fields;
+        this.formLabel = form.label;
         this.fillin = form.fields.map(_ => _['data-ftype']);
+
+        //form.fields.forEach(this.addField);
     },
     watch: {
         opt_hasUsername: function(value) {
         }
     },
     methods: {
+        /*
         addField(attrs) {
             let formEl = this.$el.querySelector('.form-fields');
             let all = [...formEl.querySelectorAll('input:not([type=checkbox])')];
@@ -140,6 +144,7 @@ Vue.component('test-form', {
             setAttrs(el, attrs);
             formEl.insertBefore(el, last);
         },
+        */
         fillValues() {
             let all = [...this.$el.querySelectorAll('.form-fields input')];
             all.forEach((_, index) => _.value = `____ ${this.fillin[index]} ____`);
