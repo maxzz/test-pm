@@ -91,7 +91,7 @@ input[type=text], input[type=password] {
 .data-forms {
     position: relative;
     margin-top: 1.4em;
-    background-color: hsl(120, 25%, 90%);
+    background-color: hsl(120, 100%, 99%);
     border: 1px dotted gray;
     max-width: 22em;
 }
@@ -116,6 +116,7 @@ input[type=text], input[type=password] {
     left: initial;
     top: -.6em;
     right: .4em;
+
     width: 1.4em;
     height: 1.2em;
     line-height: 1.2em;
@@ -138,9 +139,11 @@ input[type=text], input[type=password] {
     display: grid;
 }
 
+/* Row */
+
 .pm-test-data__row {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr min-content min-content;
     margin-bottom: .2em;
 }
 
@@ -151,4 +154,29 @@ input[type=text], input[type=password] {
     border-radius: 3px;
     padding: .2em;
     margin-left: .4em;
+
+    user-select: none;
 }
+
+.pm-test-data__row input {
+    min-width: 2em;
+}
+
+.data-form__del {
+    width: 1.4em;
+    line-height: 1.2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+
+    margin-left: .2em;
+
+    color: hsl(0, 0%, 70%);
+    border: 1px dotted hsl(0, 0%, 70%);
+    border-radius: 3px;
+
+    user-select: none;
+}
+
+/* Done */

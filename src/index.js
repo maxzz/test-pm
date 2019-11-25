@@ -147,49 +147,56 @@ Vue.component('hidden-data-form', {
     template: '#hidden-data-form',
     data: () => {
         return {
-            test: 'test',
-            lastIndex: 0,
+            lastIndex: 10,
+            loading: false,
             fields: []
         };
     },
     created() {
+        this.loading = true;
         this.fields = this.loadFields();
     },
     methods: {
         loadFields() {
-            return [
-                {
-                    value: 'test 1',
-                    password: false,
-                    idx: 0,
-                },
-                {
-                    value: 'test 2',
-                    password: true,
-                    idx: 1,
-                },
-                {
-                    value: 'test 3',
-                    password: false,
-                    idx: 2,
-                },
-            ];
+            let cnt = localStorage.getItem('ps-test-data');
+            try {
+                cnt = cnt && JSON.parse(cnt) || [];
+            } catch(err) {
+                cnt = [];
+            }
+            cnt.forEach(_ => _.idx = this.lastIndex++);
+
+            console.log('now', cnt.map(_ => _.idx));
+
+            return cnt;
         },
         saveField() {
             let cnt = JSON.stringify(this.fields);
             localStorage.setItem('ps-test-data', cnt);
         },
         onAddField() {
-            console.log('add');
+            this.fields.push({
+                value: `data ${this.lastIndex}`,
+                password: false,
+                idx: this.lastIndex++,
+            });
+        },
+        onDelField(idx) {
+            console.log('id', idx);
+            console.log('deleted now', this.fields.map(_ => _.idx));
+            let newFields = this.fields.filter(_ => _.idx != idx);
+            console.log('deleted aft', newFields.map(_ => _.idx));
+            this.fields = newFields; 
         },
     },
     watch: {
-        // fields: function(val) {
-        //     console.log('fields', val);
-        // }
         fields: {
-            handler(newVal, oldVal) {
-                console.log('fields handler', newVal, oldVal);
+            handler(val, old) {
+                if (this.loading) {
+                    this.loading = false;
+                } else {
+                    this.saveField();
+                }
             },
             deep: true
         }
