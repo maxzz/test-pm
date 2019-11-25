@@ -94,13 +94,15 @@ input[type=text], input[type=password] {
     background-color: hsl(120, 100%, 99%);
     border: 1px dotted gray;
     max-width: 22em;
+
+    display: grid;
 }
 
 .data-form__label {
     cursor: default;
 }
 
-.data-form__label, .data-form__add {
+.data-form__label, .data-form__add, .data-form__2Valut {
     position: absolute;
     left: .4em;
     top: -.8em;
@@ -118,6 +120,20 @@ input[type=text], input[type=password] {
     right: .4em;
 
     width: 1.4em;
+    height: 1.2em;
+    line-height: 1.2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    outline: 0;
+    cursor: pointer;
+}
+
+.data-form__2Valut {
+    left: initial;
+    top: -.6em;
+    right: 2em;
+
+    width: 2em;
     height: 1.2em;
     line-height: 1.2em;
     font-size: 1.3em;
@@ -177,6 +193,26 @@ input[type=text], input[type=password] {
     border-radius: 3px;
 
     user-select: none;
+}
+
+/* Vault */
+
+.vault-container {
+    padding: 0 .4em;
+    user-select: none;
+    align-self: end;
+    padding-bottom: .4em;
+}
+
+.vault-container__row {
+    display: grid;
+    grid-template-columns: 1fr min-content min-content;
+}
+
+.vault-container__row input {
+    background-color: transparent;
+    border: 1px dotted hsl(0, 0%, 70%);
+    border-radius: 3px;
 }
 
 /* Done */
