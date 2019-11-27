@@ -1,0 +1,10 @@
+{
+  "name": "dp-test-password-change",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Max Zakharzhevskiy <max.za@digitalpersona.com>",
+  "license": "MIT",
+  "scripts": {
+      "build": "html-single"
+  }
+}
