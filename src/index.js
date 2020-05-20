@@ -232,7 +232,7 @@ Vue.component('hidden-data-form', {
         /* Vault */
         loadVault() {
             let vault = localStorage.getItem(STORAGE_VAULT);
-            vault = JSON.parse(vault || []);
+            vault = JSON.parse(vault || '[]');
             vault.forEach(_ => _.idx = this.lastIndex++);
             this.vault = vault;
         },
