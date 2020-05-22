@@ -110,90 +110,127 @@ body {
   border: 1px dotted gray;
   max-width: 22em;
   display: grid;
+  background: rgba(251, 255, 0, 0.233);
 }
 
-.pm-test-data label {
+/* Labels */
+.fake-form {
+  position: absolute;
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 4px;
+  align-items: center;
+  left: .4em;
+  top: -.8em;
+  padding: 2px .2em 2px;
+  font-weight: bold;
+  height: 1.2em;
+  cursor: default;
+  color: #004e00;
+  background-color: #fffdda;
+  border: 1px solid #867200;
+  border-radius: .2em;
+}
+
+.fake-form input {
+  width: 5em;
+  height: 2em;
+  font-size: .3em;
+  padding: 0;
+  cursor: default;
+}
+
+/**/
+.vault-form {
+  margin: 1em 0.4em 0;
+  background-color: #6501a0;
+  position: relative;
+  padding: 0.4em;
+}
+
+.vault-form .caption_label {
+  position: absolute;
+  top: -1.4em;
+  right: .4em;
+  height: 24px;
+}
+
+.vault-form .caption_label .caption_span {
+  background-color: #effffb;
+  border: 1px solid #959595;
+  border-radius: 3px;
+  font-size: .8em;
+  padding: .1em .4em .2em;
+}
+
+.vault-form .vault-form_row {
+  margin-bottom: 0.2em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr min-content min-content;
+  column-gap: 0.2em;
+}
+
+.vault-form .vault-form_row input {
+  min-width: 2em;
+}
+
+.vault-form .vault-form_row label {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
   font-size: .8em;
   -moz-user-select: none;
        user-select: none;
-}
-
-/* Labels */
-.group-caption {
-  position: relative;
-  margin: -.8em .4em 0;
-  height: 24px;
-  background: rgba(255, 0, 0, 0.472);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.form-title {
-  position: absolute;
-  padding: 0 .2em .2em;
-  font-weight: bold;
-  color: #004e00;
-  border: 1px solid #867200;
-  border-radius: .2em;
-  background-color: #fffdda;
-  height: 1.2em;
-}
-
-.form-title.data-form__label {
-  left: .4em;
-  top: -.8em;
-  cursor: default;
-}
-
-.caption_btn {
-  padding: .2em .4em;
-  font-weight: normal;
-  outline: 0;
-  cursor: pointer;
-  margin-left: .2em;
-}
-
-/**/
-.data-form__label input {
-  width: 1.1em;
-  height: .7em;
-  font-size: .3em;
-  padding: 0;
-  cursor: default;
-}
-
-.pm-test-data {
-  margin: 1em .4em 0;
-  display: grid;
-}
-
-/* Row */
-.pm-test-data__row {
-  display: grid;
-  grid-template-columns: 1fr min-content min-content;
-  margin-bottom: .2em;
-}
-
-.pm-test-data label {
   font-size: .8em;
-  color: #b3b3b3;
-  border: 1px dotted #b3b3b3;
+  color: #bababa;
+  border: 1px dotted #bababa;
   border-radius: 3px;
   padding: .2em;
-  margin-left: .4em;
+}
+
+.vault-form .vault-form_row .vault-form_del {
+  width: 1.2em;
+  line-height: 1.2em;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
   -moz-user-select: none;
        user-select: none;
+  color: #bababa;
+  border: 1px dotted #bababa;
+  border-radius: 3px;
 }
 
-.pm-test-data__row input {
-  min-width: 2em;
+.vault-form .caption_btn {
+  padding: 0.2em 0.4em;
+  cursor: pointer;
 }
 
-.data-form__del {
+/* Vault */
+.vault-container {
+  padding: 0 .4em;
+  -moz-user-select: none;
+       user-select: none;
+  align-self: end;
+  padding-bottom: .4em;
+  background-color: rgba(0, 217, 255, 0.39);
+}
+
+.vault-container .vault_row {
+  display: grid;
+  grid-template-columns: 1fr min-content min-content;
+}
+
+.vault-container .vault_row input {
+  background-color: transparent;
+  border: 1px dotted #b3b3b3;
+  border-radius: 3px;
+  font-size: .7em;
+}
+
+.vault-container .vault_row .data-form__del {
   width: 1.4em;
   line-height: 1.2em;
   font-size: 1.3em;
@@ -206,26 +243,6 @@ body {
   border-radius: 3px;
   -moz-user-select: none;
        user-select: none;
-}
-
-/* Vault */
-.vault-container {
-  padding: 0 .4em;
-  -moz-user-select: none;
-       user-select: none;
-  align-self: end;
-  padding-bottom: .4em;
-}
-
-.vault-container .vault-container__row {
-  display: grid;
-  grid-template-columns: 1fr min-content min-content;
-}
-
-.vault-container .vault-container__row input {
-  background-color: transparent;
-  border: 1px dotted #b3b3b3;
-  border-radius: 3px;
 }
 
 /* Done */

@@ -238,7 +238,7 @@ Vue.component('hidden-data-form', {
         },
         vaultItemDispText(vaultItem) {
             let cnt = JSON.parse(vaultItem || '[]');
-            return cnt.reduce((acc, _) => acc += `${_.value}${_.password?'***':''} `, '');
+            return cnt.reduce((acc, _, i) => acc += `${!i?'':' + '}${_.password?'\uD83D\uDD12':''}'${_.value}'`, '');
         },
         onAddToVault() {
             this.vault = [{
