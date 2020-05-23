@@ -32,6 +32,7 @@ body {
 }
 
 $space: .4rem;
+$hspace: $space / 2;
 
 #app {
     display: grid;
@@ -103,7 +104,7 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
         }
 
         input[type=text].username {
-            margin-bottom: $space / 2;
+            margin-bottom: $hspace;
             background-color: #f7fdf7;
         }
     }
@@ -114,13 +115,13 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
     
         button {
             padding: .3em;
-            margin-bottom: $space / 2;
+            margin-bottom: $hspace;
         }
     }
     
     .form-options {
         margin-top: $space;
-        padding-top: $space / 2;
+        padding-top: $hspace;
     
         label {
             display: grid;
@@ -150,7 +151,7 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
     position: absolute;
     left: $space;
     top: -21px;
-    padding: 2px $space / 2 2px;
+    padding: 2px $hspace 2px;
     font-size: .7rem;
 
     display: grid;
@@ -184,16 +185,17 @@ $form-data-bkg: #a7f2ff63;
     background-color: $form-data-bkg;
 
     .vault-form_row {
-        margin-bottom: $space / 2;
+        margin-bottom: $hspace;
 
         display: grid;
         grid-auto-flow: column;
         grid-template-columns: 1fr min-content min-content;
-        column-gap: $space / 2;
+        column-gap: $hspace;
 
         .i-what-bkg {
             display: grid;
             grid-template-columns: auto 1fr;
+            cursor: pointer;
 
             & > div {
                 border-right: 1px solid #c8c8c8;
@@ -248,9 +250,16 @@ $form-data-bkg: #a7f2ff63;
         }
     }
 
-    .caption_btn {
-        padding: $space / 2 $space;
-        cursor: pointer;
+    .df-buttons {
+        display: flex;
+        margin-top: $space;
+        justify-content: flex-end;
+
+        .caption_btn {
+            padding: $hspace $space;
+            margin-left: $hspace;
+            cursor: pointer;
+        }
     }
 }
 
@@ -269,11 +278,11 @@ $form-data-bkg: #a7f2ff63;
         display: grid;
         grid-template-columns: 1fr min-content;
         align-items: center;
-        margin-bottom: $space / 2;
+        margin-bottom: $hspace;
 
         .vr_text {
             font-size: .7rem;
-            padding: $space / 2;
+            padding: $hspace;
             height: 20px;
             white-space: nowrap;
             overflow: hidden;
@@ -298,7 +307,7 @@ $form-data-bkg: #a7f2ff63;
 
         .vr_button {
             height: 26px;
-            margin-left: $space / 2;
+            margin-left: $hspace;
             font-size: 12px;
             padding: 0 $space;
             text-align: center;

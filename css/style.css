@@ -177,6 +177,7 @@ body {
 .vault-form .vault-form_row .i-what-bkg {
   display: grid;
   grid-template-columns: auto 1fr;
+  cursor: pointer;
 }
 
 .vault-form .vault-form_row .i-what-bkg > div {
@@ -231,8 +232,15 @@ body {
   border-radius: 3px;
 }
 
-.vault-form .caption_btn {
+.vault-form .df-buttons {
+  display: flex;
+  margin-top: 0.4rem;
+  justify-content: flex-end;
+}
+
+.vault-form .df-buttons .caption_btn {
   padding: 0.2rem 0.4rem;
+  margin-left: 0.2rem;
   cursor: pointer;
 }
 
