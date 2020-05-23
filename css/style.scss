@@ -252,7 +252,7 @@ $form-bkg: #f8f8f8;
 
         .vr_button {
             height: 26px;
-            margin: auto 0 auto $space / 2;
+            margin-left: $space / 2;
             font-size: 12px;
             padding: 0 $space;
             text-align: center;
@@ -260,15 +260,20 @@ $form-bkg: #f8f8f8;
             cursor: pointer;
             user-select: none;
         
-            color: $caption-bdr;
             border: 1px solid $caption-bdr;
             border-radius: 3px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .vr_button:first-child {
             width: 26px;
+            font-size: 22px;
             padding: inherit;
-            background-color: salmon;
+            background-color: #ff6a59;
+            border-color: #d80000;
             color: white;
         }
     }
