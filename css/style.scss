@@ -246,7 +246,7 @@ $form-bkg: #f8f8f8;
             }
         }
 
-        &:hover .vr_buttons {
+        &:focus .vr_buttons {
             display: block;
         }
 

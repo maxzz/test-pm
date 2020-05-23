@@ -232,7 +232,7 @@ body {
   display: flex;
 }
 
-.vault-container .vault_row:hover .vr_buttons {
+.vault-container .vault_row:focus .vr_buttons {
   display: block;
 }
 
