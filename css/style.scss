@@ -223,12 +223,14 @@ $form-bkg: #f8f8f8;
 
     .vault_row {
         display: grid;
-        grid-template-columns: 1fr min-content min-content;
+        grid-template-columns: 1fr min-content;
+        align-items: center;
+        margin-bottom: $space / 2;
 
-        .vault-row_text {
+        .vr_text {
             font-size: .7rem;
             padding: $space / 2;
-            height: 1rem;
+            height: 20px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -236,28 +238,38 @@ $form-bkg: #f8f8f8;
             border-radius: 3px;
         }
 
-        input {
-            background-color: transparent;
-            border: 1px dotted $caption-bdr;
-            border-radius: 3px;
-            font-size: .7rem;
+        .vr_buttons {
+            display: none;
+            
+            & > div {
+                display: flex;
+            }
         }
 
-        .data-form__del {
-            width: 1.4em;
-            line-height: 1.2em;
-            font-size: 1.3em;
-            font-weight: bold;
+        &:hover .vr_buttons {
+            display: block;
+        }
+
+        .vr_button {
+            height: 26px;
+            margin: auto 0 auto $space / 2;
+            font-size: 12px;
+            padding: 0 $space;
             text-align: center;
+
             cursor: pointer;
-        
-            margin-left: .2em;
+            user-select: none;
         
             color: $caption-bdr;
             border: 1px dotted $caption-bdr;
             border-radius: 3px;
-        
-            user-select: none;
+        }
+
+        .vr_button:first-child {
+            width: 26px;
+            padding: inherit;
+            background-color: salmon;
+            color: white;
         }
     }
 }
