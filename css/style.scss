@@ -20,6 +20,17 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.svg-icon {
+    width: 14px;
+    height: 14px;
+    margin: auto 0;
+    path {
+        fill: #b2b2b2;
+        stroke: #848484;
+        stroke-width: .7;
+    }
+}
+
 $space: .4rem;
 
 #app {
@@ -36,6 +47,7 @@ $space: .4rem;
 $caption-bdr: #959595;
 $caption-bkg: #effffb;
 $form-bkg: #f8f8f8;
+$form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 
 .caption_label {
     position: absolute;
@@ -59,11 +71,11 @@ $form-bkg: #f8f8f8;
 
 .train-form {
     position: relative;
+    padding: $space;
     outline: 1px solid $caption-bdr;
+    box-shadow: $form-shadow;
     background-color: $form-bkg;
     //background-color: hsla(210, 100%, 86%, 0.349);
-    padding: $space;
-    box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 
     $field-width: 7rem;
     
@@ -128,7 +140,8 @@ $form-bkg: #f8f8f8;
     padding: $space;
 
     border: 1px dotted gray;
-    background-color: hsl(191, 100%, 97%);
+    background-color: $form-bkg;
+    // background-color: hsl(191, 100%, 97%);
 }
 
 /* Fake caption form */
@@ -160,11 +173,15 @@ $form-bkg: #f8f8f8;
 
 /* Fake form data */
 
+$form-data-bkg: #a7f2ff63;
+
 .vault-form {
     position: relative;
     margin-top: $space * 3;
     padding: $space;
-    background-color: rgb(101, 1, 160);
+    outline: 1px solid $caption-bdr;
+    box-shadow: $form-shadow;
+    background-color: $form-data-bkg;
 
     .vault-form_row {
         margin-bottom: $space / 2;
@@ -174,8 +191,33 @@ $form-bkg: #f8f8f8;
         grid-template-columns: 1fr min-content min-content;
         column-gap: $space / 2;
 
-        input {
-            min-width: 2rem;
+        .i-what-bkg {
+            display: grid;
+            grid-template-columns: auto 1fr;
+
+            & > div {
+                border-right: 1px solid #c8c8c8;
+                background-color: rgb(233, 233, 233);
+                border-radius: 3px 0 0 3px;
+                display: grid;
+                justify-content: center;
+            }
+
+            .svg-icon {
+                width: 26px;
+                path {
+                    fill: #3d0046;
+                    stroke: #3d0046;
+                    stroke-width: .7;
+                }
+            }
+
+            input {
+                min-width: 2rem;
+                border: none;
+                border-radius: 0 3px 3px 0;
+                padding-left: $space;
+            }
         }
 
         label {
@@ -218,7 +260,9 @@ $form-bkg: #f8f8f8;
     position: relative;
     margin-top: $space * 4;
     padding: $space;
-    background-color: rgba(0, 217, 255, 0.39);
+    outline: 1px solid $caption-bdr;
+    box-shadow: $form-shadow;
+    background-color: $form-data-bkg;
     user-select: none;
 
     .vault_row {
@@ -236,6 +280,8 @@ $form-bkg: #f8f8f8;
             text-overflow: ellipsis;
             border: 1px solid $caption-bdr;
             border-radius: 3px;
+
+            background-color: #ffffff7c;
         }
 
         .vr_buttons {

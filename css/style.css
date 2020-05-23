@@ -20,6 +20,18 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.svg-icon {
+  width: 14px;
+  height: 14px;
+  margin: auto 0;
+}
+
+.svg-icon path {
+  fill: #b2b2b2;
+  stroke: #848484;
+  stroke-width: .7;
+}
+
 #app {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -52,10 +64,10 @@ body {
 
 .train-form {
   position: relative;
-  outline: 1px solid #959595;
-  background-color: #f8f8f8;
   padding: 0.4rem;
+  outline: 1px solid #959595;
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: #f8f8f8;
 }
 
 .train-form .form_body {
@@ -117,7 +129,7 @@ body {
   position: relative;
   padding: 0.4rem;
   border: 1px dotted gray;
-  background-color: #f0fcff;
+  background-color: #f8f8f8;
 }
 
 /* Fake caption form */
@@ -149,7 +161,9 @@ body {
   position: relative;
   margin-top: 1.2rem;
   padding: 0.4rem;
-  background-color: #6501a0;
+  outline: 1px solid #959595;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: #a7f2ff63;
 }
 
 .vault-form .vault-form_row {
@@ -160,8 +174,34 @@ body {
   column-gap: 0.2rem;
 }
 
-.vault-form .vault-form_row input {
+.vault-form .vault-form_row .i-what-bkg {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.vault-form .vault-form_row .i-what-bkg > div {
+  border-right: 1px solid #c8c8c8;
+  background-color: #e9e9e9;
+  border-radius: 3px 0 0 3px;
+  display: grid;
+  justify-content: center;
+}
+
+.vault-form .vault-form_row .i-what-bkg .svg-icon {
+  width: 26px;
+}
+
+.vault-form .vault-form_row .i-what-bkg .svg-icon path {
+  fill: #3d0046;
+  stroke: #3d0046;
+  stroke-width: .7;
+}
+
+.vault-form .vault-form_row .i-what-bkg input {
   min-width: 2rem;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  padding-left: 0.4rem;
 }
 
 .vault-form .vault-form_row label {
@@ -201,7 +241,9 @@ body {
   position: relative;
   margin-top: 1.6rem;
   padding: 0.4rem;
-  background-color: rgba(0, 217, 255, 0.39);
+  outline: 1px solid #959595;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: #a7f2ff63;
   -moz-user-select: none;
        user-select: none;
 }
@@ -222,6 +264,7 @@ body {
   text-overflow: ellipsis;
   border: 1px solid #959595;
   border-radius: 3px;
+  background-color: #ffffff7c;
 }
 
 .vault-container .vault_row .vr_buttons {
