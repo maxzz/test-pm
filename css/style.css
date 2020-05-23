@@ -171,8 +171,8 @@ body {
   font-size: .7rem;
   -moz-user-select: none;
        user-select: none;
-  color: #bababa;
-  border: 1px dotted #bababa;
+  color: #959595;
+  border: 1px dotted #959595;
   border-radius: 3px;
   padding: .2em;
 }
@@ -186,8 +186,8 @@ body {
   cursor: pointer;
   -moz-user-select: none;
        user-select: none;
-  color: #bababa;
-  border: 1px dotted #bababa;
+  color: #959595;
+  border: 1px dotted #959595;
   border-radius: 3px;
 }
 
@@ -211,11 +211,22 @@ body {
   grid-template-columns: 1fr min-content min-content;
 }
 
+.vault-container .vault_row .vault-row_text {
+  font-size: .7rem;
+  padding: 0.2rem;
+  height: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #959595;
+  border-radius: 3px;
+}
+
 .vault-container .vault_row input {
   background-color: transparent;
-  border: 1px dotted #b3b3b3;
+  border: 1px dotted #959595;
   border-radius: 3px;
-  font-size: .7em;
+  font-size: .7rem;
 }
 
 .vault-container .vault_row .data-form__del {
@@ -226,8 +237,8 @@ body {
   text-align: center;
   cursor: pointer;
   margin-left: .2em;
-  color: #b3b3b3;
-  border: 1px dotted #b3b3b3;
+  color: #959595;
+  border: 1px dotted #959595;
   border-radius: 3px;
   -moz-user-select: none;
        user-select: none;
