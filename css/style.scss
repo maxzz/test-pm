@@ -246,7 +246,7 @@ $form-bkg: #f8f8f8;
             }
         }
 
-        &:focus .vr_buttons {
+        &:hover .vr_buttons {
             display: block;
         }
 
@@ -261,7 +261,7 @@ $form-bkg: #f8f8f8;
             user-select: none;
         
             color: $caption-bdr;
-            border: 1px dotted $caption-bdr;
+            border: 1px solid $caption-bdr;
             border-radius: 3px;
         }
 

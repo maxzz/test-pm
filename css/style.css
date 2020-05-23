@@ -232,7 +232,7 @@ body {
   display: flex;
 }
 
-.vault-container .vault_row:focus .vr_buttons {
+.vault-container .vault_row:hover .vr_buttons {
   display: block;
 }
 
@@ -246,7 +246,7 @@ body {
   -moz-user-select: none;
        user-select: none;
   color: #959595;
-  border: 1px dotted #959595;
+  border: 1px solid #959595;
   border-radius: 3px;
 }
 
