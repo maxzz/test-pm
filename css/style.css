@@ -7,52 +7,61 @@ html {
   padding: 0;
 }
 
-body {
-  background: #fefefe;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.main-bkg-dark {
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMTIzIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNCI+PC9yZWN0Pgo8L3N2Zz4=");
+}
+
+.main-bkg {
   background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMTEyMjMzMDEiPjwvcmVjdD4KPHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC40Ij48L3JlY3Q+Cjwvc3ZnPg==");
 }
 
-/* App */
+body {
+  background: #fefefe;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 #app {
   display: grid;
   grid-template-columns: auto 1fr;
+  column-gap: 0.56rem;
+  padding: 1.6rem;
+  margin: 0 auto;
+  max-width: 500px;
 }
 
 /* Main Forms */
+.caption_label {
+  position: absolute;
+  top: -1.4em;
+  right: 0.4rem;
+  height: 24px;
+}
+
+.caption_label .caption_span {
+  background-color: #effffb;
+  border: 1px solid #959595;
+  border-radius: 3px;
+  font-size: .7rem;
+  padding: 0.1em 0.4rem 0.2em;
+}
+
 .main-forms {
   display: grid;
   row-gap: 1.8em;
-  margin: 1.4em .6em 0;
 }
 
 .train-form {
   position: relative;
   outline: 1px solid #959595;
   background-color: #f8f8f8;
-  padding: .4em;
+  padding: 0.4rem;
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
-}
-
-.train-form .caption_label {
-  position: absolute;
-  top: -1.4em;
-  right: .4em;
-  height: 24px;
-}
-
-.train-form .caption_label .caption_span {
-  background-color: #effffb;
-  border: 1px solid #959595;
-  border-radius: 3px;
-  font-size: .8em;
-  padding: .1em .4em .2em;
 }
 
 .train-form .form_body {
   display: grid;
-  grid-template-columns: minmax(7em, min-content) auto;
-  column-gap: .4em;
+  grid-template-columns: minmax(7rem, min-content) auto;
+  column-gap: 0.4rem;
 }
 
 .train-form .form_body .form-fields {
@@ -61,19 +70,20 @@ body {
 }
 
 .train-form .form_body input[type=text], .train-form .form_body input[type=password] {
-  padding: .4em;
-  max-width: 7em;
+  padding: 0.4rem;
+  max-width: 7rem;
+  font-size: .7rem;
   background-color: #fdf5ff;
   border: 1px solid #909090;
   border-radius: 3px;
 }
 
 .train-form .form_body input[type=text]::placeholder, .train-form .form_body input[type=password]::placeholder {
-  font-size: .7em;
+  font-size: .7rem;
 }
 
 .train-form .form_body input[type=text].username {
-  margin-bottom: .2em;
+  margin-bottom: 0.2rem;
   background-color: #f7fdf7;
 }
 
@@ -84,20 +94,20 @@ body {
 
 .train-form .form-right button {
   padding: .3em;
-  margin-bottom: .2em;
+  margin-bottom: 0.2rem;
 }
 
 .train-form .form-options {
-  margin-top: .4em;
-  padding-top: .2em;
+  margin-top: 0.4rem;
+  padding-top: 0.2rem;
 }
 
 .train-form .form-options label {
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: .4em;
+  column-gap: 0.4rem;
   align-items: center;
-  font-size: .75em;
+  font-size: .75rem;
   -moz-user-select: none;
        user-select: none;
 }
@@ -105,84 +115,62 @@ body {
 /* Data Forms */
 .data-forms {
   position: relative;
-  margin-top: 1.4em;
-  background-color: #fafffa;
+  padding: 0.4rem;
   border: 1px dotted gray;
-  max-width: 22em;
-  display: grid;
-  background: rgba(251, 255, 0, 0.233);
+  background-color: #f0fcff;
 }
 
-/* Labels */
+/* Fake caption form */
 .fake-form {
   position: absolute;
+  left: 0.4rem;
+  top: -21px;
+  padding: 2px 0.2rem 2px;
+  font-size: .7rem;
   display: grid;
   grid-auto-flow: column;
   column-gap: 4px;
-  align-items: center;
-  left: .4em;
-  top: -.8em;
-  padding: 2px .2em 2px;
-  font-weight: bold;
-  height: 1.2em;
   cursor: default;
-  color: #004e00;
-  background-color: #fffdda;
-  border: 1px solid #867200;
-  border-radius: .2em;
+  background-color: #effffb;
+  border: 1px solid #959595;
+  border-radius: 3px;
 }
 
 .fake-form input {
-  width: 5em;
-  height: 2em;
-  font-size: .3em;
+  width: 2rem;
+  height: 12px;
+  font-size: 6px;
   padding: 0;
   cursor: default;
 }
 
-/**/
+/* Fake form data */
 .vault-form {
-  margin: 1em 0.4em 0;
-  background-color: #6501a0;
   position: relative;
-  padding: 0.4em;
-}
-
-.vault-form .caption_label {
-  position: absolute;
-  top: -1.4em;
-  right: .4em;
-  height: 24px;
-}
-
-.vault-form .caption_label .caption_span {
-  background-color: #effffb;
-  border: 1px solid #959595;
-  border-radius: 3px;
-  font-size: .8em;
-  padding: .1em .4em .2em;
+  margin-top: 1.2rem;
+  padding: 0.4rem;
+  background-color: #6501a0;
 }
 
 .vault-form .vault-form_row {
-  margin-bottom: 0.2em;
+  margin-bottom: 0.2rem;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr min-content min-content;
-  column-gap: 0.2em;
+  column-gap: 0.2rem;
 }
 
 .vault-form .vault-form_row input {
-  min-width: 2em;
+  min-width: 2rem;
 }
 
 .vault-form .vault-form_row label {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  font-size: .8em;
+  font-size: .7rem;
   -moz-user-select: none;
        user-select: none;
-  font-size: .8em;
   color: #bababa;
   border: 1px dotted #bababa;
   border-radius: 3px;
@@ -204,18 +192,18 @@ body {
 }
 
 .vault-form .caption_btn {
-  padding: 0.2em 0.4em;
+  padding: 0.2rem 0.4rem;
   cursor: pointer;
 }
 
 /* Vault */
 .vault-container {
-  padding: 0 .4em;
+  position: relative;
+  margin-top: 1.6rem;
+  padding: 0.4rem;
+  background-color: rgba(0, 217, 255, 0.39);
   -moz-user-select: none;
        user-select: none;
-  align-self: end;
-  padding-bottom: .4em;
-  background-color: rgba(0, 217, 255, 0.39);
 }
 
 .vault-container .vault_row {
