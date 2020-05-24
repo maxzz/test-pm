@@ -1,5 +1,5 @@
 Vue.use(window.vueCompositionApi.default);
-const { ref, reactive } = window.vueCompositionApi;
+const { ref, reactive, toRefs } = window.vueCompositionApi;
 
 Vue.component('child', {
     template: `
@@ -212,14 +212,6 @@ const STORAGE_VAULT = 'd16-pchange-vault';
 
 Vue.component('data-forms', {
     template: '#data-forms',
-    // data: () => {
-    //     return {
-    //         lastIndex: 10,
-    //         loadingLocalStorage: false,
-    //         fields: [],
-    //         //vault: [],
-    //     };
-    // },
     created() {
         this.loadLocalStorage();
         this.loadVault();
@@ -227,72 +219,141 @@ Vue.component('data-forms', {
     setup(props, ctx) {
         console.log('api', props, ctx);
 
-        const dataa = reactive({
+        const data = reactive({
             lastIndex: 10,
             loadingLocalStorage: false,
             fields: [],
             vault: [],
         });
 
-        return {
-            ...dataa
-        };
-    },
-    methods: {
         /* Fields */
-        parseFieldsFromString(cnt) {
+        function parseFieldsFromString(cnt) {
             try {
                 cnt = cnt && JSON.parse(cnt) || [];
             } catch(err) {
                 cnt = [];
             }
-            cnt.forEach(_ => _.idx = this.lastIndex++);
+            cnt.forEach(_ => _.idx = data.lastIndex++);
             return cnt;
-        },
-        loadLocalStorage() {
-            this.loadingLocalStorage = true;
+        }
+        function loadLocalStorage() {
+            data.loadingLocalStorage = true;
             let cnt = localStorage.getItem(STORAGE_CURRENT);
-            this.fields = this.parseFieldsFromString(cnt);
-        },
-        saveFieldsToLocalStorage() {
-            let cnt = JSON.stringify(this.fields);
+            data.fields = parseFieldsFromString(cnt);
+        }
+        function saveFieldsToLocalStorage() {
+            let cnt = JSON.stringify(data.fields);
             localStorage.setItem(STORAGE_CURRENT, cnt);
-        },
-        onAddField() {
-            this.fields.push({
-                value: `data ${this.lastIndex}`,
+        }
+        function onAddField() {
+            data.fields.push({
+                value: `data ${data.lastIndex}`,
                 password: false,
-                idx: this.lastIndex++,
+                idx: data.lastIndex++,
             });
-        },
-        onDelField(idx) {
-            let newFields = this.fields.filter(_ => _.idx != idx);
-            this.fields = newFields; 
-        },
+        }
+        function onDelField(idx) {
+            let newFields = data.fields.filter(_ => _.idx != idx);
+            data.fields = newFields; 
+        }
+
         /* Vault */
-        loadVault() {
+        function loadVault() {
             let vault = localStorage.getItem(STORAGE_VAULT);
             vault = JSON.parse(vault || '[]');
-            vault.forEach(_ => _.idx = this.lastIndex++);
-            this.vault = vault;
-        },
-        vaultItemDispText(vaultItem) {
+            vault.forEach(_ => _.idx = data.lastIndex++);
+            data.vault = vault;
+        }
+        function vaultItemDispText(vaultItem) {
             let cnt = JSON.parse(vaultItem || '[]');
             return cnt.reduce((acc, _, i) => acc += `${!i?'':' + '}${_.password?'\uD83D\uDD12':''}'${_.value}'`, '');
-        },
-        onAddToVault() {
-            this.vault = [{
-                data: JSON.stringify(this.fields),
-                idx: this.lastIndex++,
-            }, ...this.vault];
-            localStorage.setItem(STORAGE_VAULT, JSON.stringify(this.vault));
-        },
-        onDelFromVault(idx) {
-            this.vault = this.vault.filter(_ => _.idx !== idx);
-        },
-        onSetFieldsFromVault(data) {
-            this.fields = this.parseFieldsFromString(data);
-        },
+        }
+        function onAddToVault() {
+            data.vault = [{
+                data: JSON.stringify(data.fields),
+                idx: data.lastIndex++,
+            }, ...data.vault];
+            localStorage.setItem(STORAGE_VAULT, JSON.stringify(data.vault));
+        }
+        function onDelFromVault(idx) {
+            data.vault = data.vault.filter(_ => _.idx !== idx);
+        }
+        function onSetFieldsFromVault(data) {
+            data.fields = parseFieldsFromString(data);
+        }
+
+        return {
+            ...toRefs(data),
+
+            /* Fields */
+            loadLocalStorage,
+            saveFieldsToLocalStorage,
+            onAddField,
+            onDelField,
+    
+            /* Vault */
+            loadVault,
+            vaultItemDispText,
+            onAddToVault,
+            onDelFromVault,
+        };
+    },
+    methods: {
+        /* Fields */
+        // parseFieldsFromString(cnt) {
+        //     try {
+        //         cnt = cnt && JSON.parse(cnt) || [];
+        //     } catch(err) {
+        //         cnt = [];
+        //     }
+        //     cnt.forEach(_ => _.idx = this.lastIndex++);
+        //     return cnt;
+        // },
+        // loadLocalStorage() {
+        //     this.loadingLocalStorage = true;
+        //     let cnt = localStorage.getItem(STORAGE_CURRENT);
+        //     this.fields = this.parseFieldsFromString(cnt);
+        // },
+        // saveFieldsToLocalStorage() {
+        //     let cnt = JSON.stringify(this.fields);
+        //     localStorage.setItem(STORAGE_CURRENT, cnt);
+        // },
+        // onAddField() {
+        //     this.fields.push({
+        //         value: `data ${this.lastIndex}`,
+        //         password: false,
+        //         idx: this.lastIndex++,
+        //     });
+        // },
+        // onDelField(idx) {
+        //     let newFields = this.fields.filter(_ => _.idx != idx);
+        //     this.fields = newFields; 
+        // },
+
+        /* Vault */
+        // loadVault() {
+        //     let vault = localStorage.getItem(STORAGE_VAULT);
+        //     vault = JSON.parse(vault || '[]');
+        //     vault.forEach(_ => _.idx = this.lastIndex++);
+        //     this.vault = vault;
+        // },
+        // vaultItemDispText(vaultItem) {
+        //     let cnt = JSON.parse(vaultItem || '[]');
+        //     return cnt.reduce((acc, _, i) => acc += `${!i?'':' + '}${_.password?'\uD83D\uDD12':''}'${_.value}'`, '');
+        // },
+        // onAddToVault() {
+        //     this.vault = [{
+        //         data: JSON.stringify(this.fields),
+        //         idx: this.lastIndex++,
+        //     }, ...this.vault];
+        //     localStorage.setItem(STORAGE_VAULT, JSON.stringify(this.vault));
+        // },
+        // onDelFromVault(idx) {
+        //     this.vault = this.vault.filter(_ => _.idx !== idx);
+        // },
+        // onSetFieldsFromVault(data) {
+        //     this.fields = this.parseFieldsFromString(data);
+        // },
     },
     watch: {
         fields: {
