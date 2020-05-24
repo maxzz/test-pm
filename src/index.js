@@ -34,8 +34,6 @@ Vue.component('i-what', {
     props: ['psw']
 });
 
-
-
 const formsData = {
     'formA-nn': {
         label: 'Change: New+New',
@@ -209,8 +207,8 @@ Vue.component('test-form', {
 const STORAGE_CURRENT = 'd16-pchange-data';
 const STORAGE_VAULT = 'd16-pchange-vault';
 
-Vue.component('hidden-data-form', {
-    template: '#hidden-data-form',
+Vue.component('data-forms', {
+    template: '#data-forms',
     data: () => {
         return {
             lastIndex: 10,
