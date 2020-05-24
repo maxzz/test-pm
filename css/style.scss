@@ -40,8 +40,9 @@ $input-height: 26px;
     max-width: 570px;
 
     .user-forms {
-        display: grid;
-        row-gap: 1.8em;
+        .user-form:not(:first-child) {
+            margin-top: 1.8rem;
+        }
     }
 
     .data-forms {

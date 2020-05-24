@@ -30,9 +30,8 @@ body {
   max-width: 570px;
 }
 
-#app .user-forms {
-  display: grid;
-  row-gap: 1.8em;
+#app .user-forms .user-form:not(:first-child) {
+  margin-top: 1.8rem;
 }
 
 #app .data-forms {
