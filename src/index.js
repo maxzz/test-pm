@@ -135,7 +135,7 @@ Vue.component('test-form', {
         return {
             formId: '',
             formLabel: '',
-            loading: false,
+            loading: true,
 
             watching: {
                 field_username: '',
@@ -150,6 +150,14 @@ Vue.component('test-form', {
             },
 
             fillin: [] // fill-values: 0 - old; 1 - new
+        };
+    },
+    setup() {
+        onMounted(() => {
+
+        });
+        return {
+
         };
     },
     mounted() {
@@ -195,14 +203,15 @@ Vue.component('test-form', {
             };
             localStorage.setItem(`${STORAGE_TESTFORM}-${this.formId}`, JSON.stringify(s));
         },
-        fillValues() {
-            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = `____ ${this.fillin[index] + (this.watching.options.fillInvalid ? index : 0)} ____`));
-        },
-        clearValues() {
-            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = ''));
-        },
+
         fieldType(field) {
             return field.type === 'hidden' ? 'hidden' : this.watching.options.showPsws ? 'text' : field.type;
+        },
+        onFillValues() {
+            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = `____ ${this.fillin[index] + (this.watching.options.fillInvalid ? index : 0)} ____`));
+        },
+        onClearValues() {
+            this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = ''));
         },
     },
 });
@@ -213,38 +222,31 @@ const STORAGE_VAULT = 'd16-pchange-vault';
 Vue.component('data-forms', {
     template: '#data-forms',
     setup(props, ctx) {
-        console.log('api', props, ctx, window.vueCompositionApi);
-
         const data = reactive({
             lastIndex: 10,
-            loadingLocalStorage: true,
+            loading: true,
             fields: [],
             vault: [],
         });
 
-        console.log('setup data', data.loadingLocalStorage);
-
         onMounted(() => {
-            console.log('before mounting data', data.loadingLocalStorage);
-            loadLocalStorage();
-            loadVault();
-            console.log('mounting done data', data.loadingLocalStorage);
-        });
-
-        watch(() => data.fields, () => {
-
-            if (data.loadingLocalStorage) {
-                data.loadingLocalStorage = false;
-                console.log('fields. loading: false');
-            } else {
-                saveFieldsToLocalStorage();
-                console.log('fields. loading: true');
+            function loadLocalStorage() {
+                data.loading = true;
+                let cnt = localStorage.getItem(STORAGE_CURRENT);
+                data.fields = parseFieldsFromString(cnt);
+            }
+            function loadVault() {
+                let vault = localStorage.getItem(STORAGE_VAULT);
+                vault = JSON.parse(vault || '[]');
+                vault.forEach(_ => _.idx = data.lastIndex++);
+                data.vault = vault;
             }
 
-            console.log('fields', data.fields);
-        }, {
-            deep: true
+            loadLocalStorage();
+            loadVault();
         });
+
+        watch(() => data.fields, () => data.loading ? (data.loading = false) : saveFieldsToLocalStorage(), { deep: true });
 
         /* Fields */
         function parseFieldsFromString(cnt) {
@@ -255,11 +257,6 @@ Vue.component('data-forms', {
             }
             cnt.forEach(_ => _.idx = data.lastIndex++);
             return cnt;
-        }
-        function loadLocalStorage() {
-            data.loadingLocalStorage = true;
-            let cnt = localStorage.getItem(STORAGE_CURRENT);
-            data.fields = parseFieldsFromString(cnt);
         }
         function saveFieldsToLocalStorage() {
             let cnt = JSON.stringify(data.fields);
@@ -278,12 +275,6 @@ Vue.component('data-forms', {
         }
 
         /* Vault */
-        function loadVault() {
-            let vault = localStorage.getItem(STORAGE_VAULT);
-            vault = JSON.parse(vault || '[]');
-            vault.forEach(_ => _.idx = data.lastIndex++);
-            data.vault = vault;
-        }
         function vaultItemDispText(vaultItem) {
             let cnt = JSON.parse(vaultItem || '[]');
             return cnt.reduce((acc, _, i) => acc += `${!i?'':' + '}${_.password?'\uD83D\uDD12':''}'${_.value}'`, '');
@@ -304,31 +295,16 @@ Vue.component('data-forms', {
 
         return {
             ...toRefs(data),
-
             /* Fields */
-            saveFieldsToLocalStorage,
             onAddField,
             onDelField,
-    
             /* Vault */
             vaultItemDispText,
             onAddToVault,
             onDelFromVault,
             onSetFieldsFromVault,
         };
-    },
-    // watch: {
-    //     fields: {
-    //         handler(val, old) {
-    //             if (this.loadingLocalStorage) {
-    //                 this.loadingLocalStorage = false;
-    //             } else {
-    //                 this.saveFieldsToLocalStorage();
-    //             }
-    //         },
-    //         deep: true
-    //     }
-    // }
+    }
 });
 
 var vm = new Vue({
@@ -353,3 +329,5 @@ var vm = new Vue({
         }
     }
 });
+
+//console.log('api', window.vueCompositionApi);
