@@ -1,5 +1,5 @@
 Vue.use(window.vueCompositionApi.default);
-const { ref, reactive, toRefs, onMounted } = window.vueCompositionApi;
+const { ref, reactive, toRefs, onMounted, watch } = window.vueCompositionApi;
 
 Vue.component('child', {
     template: `
@@ -212,23 +212,38 @@ const STORAGE_VAULT = 'd16-pchange-vault';
 
 Vue.component('data-forms', {
     template: '#data-forms',
-    // created() {
-    //     this.loadLocalStorage();
-    //     this.loadVault();
-    // },
     setup(props, ctx) {
         console.log('api', props, ctx, window.vueCompositionApi);
 
         const data = reactive({
             lastIndex: 10,
-            loadingLocalStorage: false,
+            loadingLocalStorage: true,
             fields: [],
             vault: [],
         });
 
+        console.log('setup data', data.loadingLocalStorage);
+
         onMounted(() => {
+            console.log('before mounting data', data.loadingLocalStorage);
             loadLocalStorage();
             loadVault();
+            console.log('mounting done data', data.loadingLocalStorage);
+        });
+
+        watch(() => data.fields, () => {
+
+            if (data.loadingLocalStorage) {
+                data.loadingLocalStorage = false;
+                console.log('fields. loading: false');
+            } else {
+                saveFieldsToLocalStorage();
+                console.log('fields. loading: true');
+            }
+
+            console.log('fields', data.fields);
+        }, {
+            deep: true
         });
 
         /* Fields */
@@ -291,88 +306,29 @@ Vue.component('data-forms', {
             ...toRefs(data),
 
             /* Fields */
-            loadLocalStorage,
             saveFieldsToLocalStorage,
             onAddField,
             onDelField,
     
             /* Vault */
-            loadVault,
             vaultItemDispText,
             onAddToVault,
             onDelFromVault,
             onSetFieldsFromVault,
         };
     },
-    methods: {
-        /* Fields */
-        // parseFieldsFromString(cnt) {
-        //     try {
-        //         cnt = cnt && JSON.parse(cnt) || [];
-        //     } catch(err) {
-        //         cnt = [];
-        //     }
-        //     cnt.forEach(_ => _.idx = this.lastIndex++);
-        //     return cnt;
-        // },
-        // loadLocalStorage() {
-        //     this.loadingLocalStorage = true;
-        //     let cnt = localStorage.getItem(STORAGE_CURRENT);
-        //     this.fields = this.parseFieldsFromString(cnt);
-        // },
-        // saveFieldsToLocalStorage() {
-        //     let cnt = JSON.stringify(this.fields);
-        //     localStorage.setItem(STORAGE_CURRENT, cnt);
-        // },
-        // onAddField() {
-        //     this.fields.push({
-        //         value: `data ${this.lastIndex}`,
-        //         password: false,
-        //         idx: this.lastIndex++,
-        //     });
-        // },
-        // onDelField(idx) {
-        //     let newFields = this.fields.filter(_ => _.idx != idx);
-        //     this.fields = newFields; 
-        // },
-
-        /* Vault */
-        // loadVault() {
-        //     let vault = localStorage.getItem(STORAGE_VAULT);
-        //     vault = JSON.parse(vault || '[]');
-        //     vault.forEach(_ => _.idx = this.lastIndex++);
-        //     this.vault = vault;
-        // },
-        // vaultItemDispText(vaultItem) {
-        //     let cnt = JSON.parse(vaultItem || '[]');
-        //     return cnt.reduce((acc, _, i) => acc += `${!i?'':' + '}${_.password?'\uD83D\uDD12':''}'${_.value}'`, '');
-        // },
-        // onAddToVault() {
-        //     this.vault = [{
-        //         data: JSON.stringify(this.fields),
-        //         idx: this.lastIndex++,
-        //     }, ...this.vault];
-        //     localStorage.setItem(STORAGE_VAULT, JSON.stringify(this.vault));
-        // },
-        // onDelFromVault(idx) {
-        //     this.vault = this.vault.filter(_ => _.idx !== idx);
-        // },
-        // onSetFieldsFromVault(data) {
-        //     this.fields = this.parseFieldsFromString(data);
-        // },
-    },
-    watch: {
-        fields: {
-            handler(val, old) {
-                if (this.loadingLocalStorage) {
-                    this.loadingLocalStorage = false;
-                } else {
-                    this.saveFieldsToLocalStorage();
-                }
-            },
-            deep: true
-        }
-    }
+    // watch: {
+    //     fields: {
+    //         handler(val, old) {
+    //             if (this.loadingLocalStorage) {
+    //                 this.loadingLocalStorage = false;
+    //             } else {
+    //                 this.saveFieldsToLocalStorage();
+    //             }
+    //         },
+    //         deep: true
+    //     }
+    // }
 });
 
 var vm = new Vue({
