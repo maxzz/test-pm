@@ -123,6 +123,11 @@ $input-height: 26px;
         display: grid;
         grid-template-columns: minmax($field-width, min-content) auto;
         column-gap: $space;
+
+        .username-bkg {
+            height: $input-height;
+            margin-bottom: $hspace;
+        }
     
         .uf-fields {
             display: grid;
@@ -147,7 +152,6 @@ $input-height: 26px;
         }
 
         input[type=text].username {
-            margin-bottom: $hspace;
             background-color: $input-usr-bkg;
         }
     }

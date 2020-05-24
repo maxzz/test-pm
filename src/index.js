@@ -131,27 +131,6 @@ const STORAGE_TESTFORM = 'd16-pchange-test-form';
 
 Vue.component('test-form', {
     template: '#test-template',
-    // data: function() {
-    //     return {
-    //         formId: '',
-    //         formLabel: '',
-    //         loading: true,
-
-    //         watching: {
-    //             field_username: '',
-    //             fields: [],
-
-    //             options: {
-    //                 hasUsername: false,
-    //                 hasLogin: true,
-    //                 fillInvalid: false,
-    //                 showPsws: false,
-    //             },
-    //         },
-
-    //         fillin: [] // fill-values: 0 - old; 1 - new
-    //     };
-    // },
     setup(props, ctx) {
         const dataa = reactive({
             formId: '',
@@ -172,6 +151,8 @@ Vue.component('test-form', {
 
             fillin: [] // fill-values: 0 - old; 1 - new
         });
+
+        const formRef = ref(null);
 
         function localStorageLoad() {
             let cnt = localStorage.getItem(`${STORAGE_TESTFORM}-${dataa.formId}`);
@@ -201,8 +182,6 @@ Vue.component('test-form', {
             dataa.watching.fields.forEach((_, index) => dataa.fillin[index] >= 0 && (_.value = ''));
         }
 
-        const formRef = ref(null);
-
         onMounted(() => {
             console.log('els', ctx);
 
@@ -219,81 +198,16 @@ Vue.component('test-form', {
             localStorageLoad();
         });
 
-
-        watch(() => dataa.watching, () => {
-            if (dataa.loading) {
-                dataa.loading = false;
-            } else {
-                localStorageSave();
-            }
-        }, {deep: true});
+        watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : localStorageSave(), {deep: true});
 
         return {
             formRef,
             ...toRefs(dataa),
-            localStorageLoad,
-            localStorageSave,
-
             fieldType,
             onFillValues,
             onClearValues,
         };
-    },
-    // mounted() {
-    //     this.formId = this.$el.dataset['formId'];
-
-    //     let org = formsData[this.formId];
-    //     org.fields.forEach(_ => !_.value && (_.value = ''));
-
-    //     this.formLabel = org.label;
-    //     this.watching.fields = org.fields;
-    //     this.fillin = org.fields.map(_ => _['data-ftype']);
-
-    //     this.loading = true;
-    //     this.localStorageLoad();
-    // },
-
-    // watch: {
-    //     watching: {
-    //         handler(value) {
-    //             if (this.loading) {
-    //                 this.loading = false;
-    //             } else {
-    //                 this.localStorageSave();
-    //             }
-    //         },
-    //         deep: true
-    //     }
-    // },
-    methods: {
-        // localStorageLoad() {
-        //     let cnt = localStorage.getItem(`${STORAGE_TESTFORM}-${this.formId}`);
-        //     let s = cnt && JSON.parse(cnt);
-        //     if (s) {
-        //         this.watching.field_username = s.field_username;
-        //         this.watching.fields.map((_, index) => _.value = s.fields[index]),
-        //         this.watching.options = s.options;
-        //     }
-        // },
-        // localStorageSave() {
-        //     let s = {
-        //         field_username: this.watching.field_username,
-        //         fields: this.watching.fields.map(_ => _.value),
-        //         options: this.watching.options,
-        //     };
-        //     localStorage.setItem(`${STORAGE_TESTFORM}-${this.formId}`, JSON.stringify(s));
-        // },
-
-        // fieldType(field) {
-        //     return field.type === 'hidden' ? 'hidden' : this.watching.options.showPsws ? 'text' : field.type;
-        // },
-        // onFillValues() {
-        //     this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = `____ ${this.fillin[index] + (this.watching.options.fillInvalid ? index : 0)} ____`));
-        // },
-        // onClearValues() {
-        //     this.watching.fields.forEach((_, index) => this.fillin[index] >= 0 && (_.value = ''));
-        // },
-    },
+    }
 });
 
 const STORAGE_CURRENT = 'd16-pchange-data';

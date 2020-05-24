@@ -105,6 +105,11 @@ body {
   column-gap: 0.4rem;
 }
 
+.user-form .uf_body .username-bkg {
+  height: 26px;
+  margin-bottom: 0.2rem;
+}
+
 .user-form .uf_body .uf-fields {
   display: grid;
   row-gap: .2em;
@@ -125,7 +130,6 @@ body {
 }
 
 .user-form .uf_body input[type=text].username {
-  margin-bottom: 0.2rem;
   background-color: #f7fdf7;
 }
 
