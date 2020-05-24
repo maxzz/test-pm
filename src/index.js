@@ -313,3 +313,8 @@ var vm = new Vue({
         }
     }
 });
+
+//Vue.use(window.vueCompositionApi);
+
+console.log('vue', window.vueCompositionApi);
+
