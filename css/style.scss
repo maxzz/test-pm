@@ -1,10 +1,7 @@
-html {
-    box-sizing: border-box;
-}
-
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .main-bkg-dark {
@@ -34,21 +31,37 @@ body {
 $space: .4rem;
 $hspace: $space / 2;
 
+$caption-bdr: #959595;
+$caption-bkg: #effffb;
+$form-bkg: #f8f8f8;
+$form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+
+$input-height: 26px;
+
 #app {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: $space * 1.4;
     padding: $space * 4;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 570px;
+
+    .user-forms {
+        display: grid;
+        row-gap: 1.8em;
+    }
+
+    .data-forms {
+        position: relative;
+        padding: $space $space * 2;
+    
+        border: 1px dotted gray;
+        //background-color: $form-bkg;
+        background-color: hsl(191, 100%, 97%);
+    }
 }
 
-/* Main Forms */
-
-$caption-bdr: #959595;
-$caption-bkg: #effffb;
-$form-bkg: #f8f8f8;
-$form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+/* Shared utils */
 
 .caption_label {
     position: absolute;
@@ -65,12 +78,36 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
     }
 }
 
-.main-forms {
-    display: grid;
-    row-gap: 1.8em;
+.inline-btn {
+    height: $input-height;
+    margin-left: $hspace;
+    font-size: 12px;
+    padding: 0 $space;
+    text-align: center;
+
+    cursor: pointer;
+    user-select: none;
+
+    border: 1px solid $caption-bdr;
+    border-radius: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.train-form {
+.inline-btn_cross {
+    width: $input-height;
+    font-size: 22px;
+    padding: inherit;
+    background-color: #ff6a59;
+    border-color: #d80000;
+    color: white;
+}
+
+/* Main Forms */
+
+.user-form {
     position: relative;
     padding: $space;
     outline: 1px solid $caption-bdr;
@@ -80,12 +117,12 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 
     $field-width: 7rem;
     
-    .form_body {
+    .uf_body {
         display: grid;
         grid-template-columns: minmax($field-width, min-content) auto;
         column-gap: $space;
     
-        .form-fields {
+        .uf-fields {
             display: grid;
             row-gap: .2em;
         }
@@ -109,7 +146,7 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
         }
     }
     
-    .form-right {
+    .uf_body_right {
         display: grid;
         align-content: start;
     
@@ -119,7 +156,7 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
         }
     }
     
-    .form-options {
+    .uf_options {
         margin-top: $space;
         padding-top: $hspace;
     
@@ -135,15 +172,6 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
 /* Data Forms */
-
-.data-forms {
-    position: relative;
-    padding: $space;
-
-    border: 1px dotted gray;
-    background-color: $form-bkg;
-    // background-color: hsl(191, 100%, 97%);
-}
 
 /* Fake caption form */
 
@@ -174,27 +202,28 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 
 /* Fake form data */
 
-$form-data-bkg: #a7f2ff63;
+$data-form-bkg: #a7f2ff63;
 
-.vault-form {
+.data-form {
     position: relative;
     margin-top: $space * 3;
     padding: $space;
     outline: 1px solid $caption-bdr;
     box-shadow: $form-shadow;
-    background-color: $form-data-bkg;
+    background-color: $data-form-bkg;
 
-    .vault-form_row {
+    .df_row {
         margin-bottom: $hspace;
 
         display: grid;
         grid-auto-flow: column;
         grid-template-columns: 1fr min-content min-content;
-        column-gap: $hspace;
 
         .i-what-bkg {
             display: grid;
             grid-template-columns: auto 1fr;
+            border: 1px solid $caption-bdr;
+            border-radius: 3px;
             cursor: pointer;
 
             & > div {
@@ -208,49 +237,30 @@ $form-data-bkg: #a7f2ff63;
             .svg-icon {
                 width: 26px;
                 path {
-                    fill: #3d0046;
-                    stroke: #3d0046;
-                    stroke-width: .7;
+                    fill: #7c7c7c;
+                    stroke: none;
                 }
             }
 
             input {
+                height: $input-height - 2px; // i.e. wo/ border
+                padding-left: $space;
                 min-width: 2rem;
                 border: none;
                 border-radius: 0 3px 3px 0;
-                padding-left: $space;
             }
         }
 
-        label {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            align-items: center;
-            font-size: .7rem;
-            user-select: none;
-            
-            color: $caption-bdr;
-            border: 1px dotted $caption-bdr;
-            border-radius: 3px;
-            padding: .2em;
+        .df_row_actions {
+            display: none;
         }
-            
-        .vault-form_del {
-            width: 1.2em;
-            line-height: 1.2em;
-            font-size: 1.3em;
-            font-weight: bold;
-            text-align: center;
-            cursor: pointer;
-            user-select: none;
-        
-            color: $caption-bdr;
-            border: 1px dotted $caption-bdr;
-            border-radius: 3px;
+
+        &:hover .df_row_actions {
+            display: block;
         }
     }
 
-    .df-buttons {
+    .df-actions {
         display: flex;
         margin-top: $space;
         justify-content: flex-end;
@@ -265,35 +275,35 @@ $form-data-bkg: #a7f2ff63;
 
 /* Vault */
 
-.vault-container {
+.vault-form {
     position: relative;
     margin-top: $space * 4;
     padding: $space;
     outline: 1px solid $caption-bdr;
     box-shadow: $form-shadow;
-    background-color: $form-data-bkg;
+    background-color: $data-form-bkg;
     user-select: none;
 
-    .vault_row {
+    .vf_row {
         display: grid;
         grid-template-columns: 1fr min-content;
         align-items: center;
         margin-bottom: $hspace;
 
         .vr_text {
-            font-size: .7rem;
+            height: $input-height;
             padding: $hspace;
-            height: 20px;
+            padding-top: $hspace + .1rem; // move down due to the height of the lock icon height
+            font-size: .7rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            border: 1px solid $caption-bdr;
             border-radius: 3px;
-
+            border: 1px solid $caption-bdr;
             background-color: #ffffff7c;
         }
 
-        .vr_buttons {
+        .vr_actions {
             display: none;
             
             & > div {
@@ -301,35 +311,8 @@ $form-data-bkg: #a7f2ff63;
             }
         }
 
-        &:hover .vr_buttons {
+        &:hover .vr_actions {
             display: block;
-        }
-
-        .vr_button {
-            height: 26px;
-            margin-left: $hspace;
-            font-size: 12px;
-            padding: 0 $space;
-            text-align: center;
-
-            cursor: pointer;
-            user-select: none;
-        
-            border: 1px solid $caption-bdr;
-            border-radius: 3px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .vr_button:first-child {
-            width: 26px;
-            font-size: 22px;
-            padding: inherit;
-            background-color: #ff6a59;
-            border-color: #d80000;
-            color: white;
         }
     }
 }
