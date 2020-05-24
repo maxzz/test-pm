@@ -267,6 +267,7 @@ $input-height: 26px;
         display: flex;
         margin-top: $space;
         justify-content: flex-end;
+        //white-space: nowrap; // to always have single line
 
         .caption_btn {
             padding: $hspace $space;

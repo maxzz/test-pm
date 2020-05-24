@@ -1,3 +1,6 @@
+Vue.use(window.vueCompositionApi.default);
+const { ref, reactive } = window.vueCompositionApi;
+
 Vue.component('child', {
     template: `
         <div>
@@ -209,17 +212,31 @@ const STORAGE_VAULT = 'd16-pchange-vault';
 
 Vue.component('data-forms', {
     template: '#data-forms',
-    data: () => {
-        return {
+    // data: () => {
+    //     return {
+    //         lastIndex: 10,
+    //         loadingLocalStorage: false,
+    //         fields: [],
+    //         //vault: [],
+    //     };
+    // },
+    created() {
+        this.loadLocalStorage();
+        this.loadVault();
+    },
+    setup(props, ctx) {
+        console.log('api', props, ctx);
+
+        const dataa = reactive({
             lastIndex: 10,
             loadingLocalStorage: false,
             fields: [],
             vault: [],
+        });
+
+        return {
+            ...dataa
         };
-    },
-    created() {
-        this.loadLocalStorage();
-        this.loadVault();
     },
     methods: {
         /* Fields */
@@ -313,8 +330,3 @@ var vm = new Vue({
         }
     }
 });
-
-//Vue.use(window.vueCompositionApi);
-
-console.log('vue', window.vueCompositionApi);
-
