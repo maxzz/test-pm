@@ -1,5 +1,5 @@
 Vue.use(window.vueCompositionApi.default);
-const { ref, reactive, toRefs } = window.vueCompositionApi;
+const { ref, reactive, toRefs, onMounted } = window.vueCompositionApi;
 
 Vue.component('child', {
     template: `
@@ -212,18 +212,23 @@ const STORAGE_VAULT = 'd16-pchange-vault';
 
 Vue.component('data-forms', {
     template: '#data-forms',
-    created() {
-        this.loadLocalStorage();
-        this.loadVault();
-    },
+    // created() {
+    //     this.loadLocalStorage();
+    //     this.loadVault();
+    // },
     setup(props, ctx) {
-        console.log('api', props, ctx);
+        console.log('api', props, ctx, window.vueCompositionApi);
 
         const data = reactive({
             lastIndex: 10,
             loadingLocalStorage: false,
             fields: [],
             vault: [],
+        });
+
+        onMounted(() => {
+            loadLocalStorage();
+            loadVault();
         });
 
         /* Fields */
@@ -278,8 +283,8 @@ Vue.component('data-forms', {
         function onDelFromVault(idx) {
             data.vault = data.vault.filter(_ => _.idx !== idx);
         }
-        function onSetFieldsFromVault(data) {
-            data.fields = parseFieldsFromString(data);
+        function onSetFieldsFromVault(str) {
+            data.fields = parseFieldsFromString(str);
         }
 
         return {
@@ -296,6 +301,7 @@ Vue.component('data-forms', {
             vaultItemDispText,
             onAddToVault,
             onDelFromVault,
+            onSetFieldsFromVault,
         };
     },
     methods: {
