@@ -4,14 +4,6 @@
     box-sizing: border-box;
 }
 
-.main-bkg-dark {
-    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMTIzIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNCI+PC9yZWN0Pgo8L3N2Zz4=");
-}
-
-.main-bkg {
-    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMTEyMjMzMDEiPjwvcmVjdD4KPHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC40Ij48L3JlY3Q+Cjwvc3ZnPg==");
-}
-
 body {
     background: #fefefe;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -36,6 +28,7 @@ $caption-bkg: #effffb;
 $form-bkg: #f8f8f8;
 $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 
+$data-form-bkg: #a7f2ff63;
 $input-height: 26px;
 
 #app {
@@ -62,6 +55,14 @@ $input-height: 26px;
 }
 
 /* Shared utils */
+
+.main-bkg-dark {
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMTIzIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNCI+PC9yZWN0Pgo8L3N2Zz4=");
+}
+
+.main-bkg {
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMTEyMjMzMDEiPjwvcmVjdD4KPHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC40Ij48L3JlY3Q+Cjwvc3ZnPg==");
+}
 
 .caption_label {
     position: absolute;
@@ -105,7 +106,7 @@ $input-height: 26px;
     color: white;
 }
 
-/* Main Forms */
+/* USER FORMS */
 
 .user-form {
     position: relative;
@@ -126,13 +127,17 @@ $input-height: 26px;
             display: grid;
             row-gap: .2em;
         }
+
+        $input-usr-bkg: #f7fdf7;
+        $input-psw-bkg: #fefaff;
         
         input[type=text], input[type=password] {
-            padding: $space;
+            height: $input-height;
             max-width: $field-width;
+            padding: $hspace;
             font-size: .7rem;
-            background-color: #fdf5ff;
-            border: 1px solid #909090;
+            background-color: $input-psw-bkg;
+            border: 1px solid $caption-bdr;
             border-radius: 3px;
 
             &::placeholder {
@@ -142,7 +147,7 @@ $input-height: 26px;
 
         input[type=text].username {
             margin-bottom: $hspace;
-            background-color: #f7fdf7;
+            background-color: $input-usr-bkg;
         }
     }
     
@@ -171,9 +176,7 @@ $input-height: 26px;
     }
 }
 
-/* Data Forms */
-
-/* Fake caption form */
+/* DATA FORMS: Fake caption form */
 
 .fake-form {
     position: absolute;
@@ -200,9 +203,7 @@ $input-height: 26px;
     }
 }
 
-/* Fake form data */
-
-$data-form-bkg: #a7f2ff63;
+/* DATA FORMS: Fake form data */
 
 .data-form {
     position: relative;
@@ -273,7 +274,7 @@ $data-form-bkg: #a7f2ff63;
     }
 }
 
-/* Vault */
+/* DATA FORMS: Vault */
 
 .vault-form {
     position: relative;
