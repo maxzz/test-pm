@@ -254,6 +254,7 @@ const STORAGE_VAULT = 'd16-pchange-vault';
 
 Vue.component('data-forms', {
     template: '#data-forms',
+    props: ['userForms'],
     setup(props, ctx) {
         const data = reactive({
             lastIndex: 10,
@@ -343,6 +344,7 @@ Vue.component('data-forms', {
 
 Vue.component('forms-selector', {
     template: '#forms-selector',
+    props: ['userForms'],
     setup() {
         return {};
     }
