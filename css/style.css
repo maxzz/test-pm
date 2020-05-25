@@ -90,6 +90,16 @@ body {
   color: white;
 }
 
+.checkboxes label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.4rem;
+  align-items: center;
+  font-size: .75rem;
+  -moz-user-select: none;
+       user-select: none;
+}
+
 /* USER FORMS */
 .user-form {
   position: relative;
@@ -147,16 +157,6 @@ body {
 .user-form .uf_options {
   margin-top: 0.4rem;
   padding-top: 0.2rem;
-}
-
-.user-form .uf_options label {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 0.4rem;
-  align-items: center;
-  font-size: .75rem;
-  -moz-user-select: none;
-       user-select: none;
 }
 
 /* DATA FORMS: Fake caption form */
@@ -296,16 +296,6 @@ body {
 
 .vault-form .vf_row:hover .vr_actions {
   display: block;
-}
-
-.forms-selector .uf_options label {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 0.4rem;
-  align-items: center;
-  font-size: .75rem;
-  -moz-user-select: none;
-       user-select: none;
 }
 
 /* Done */
