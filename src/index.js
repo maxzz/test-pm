@@ -39,6 +39,28 @@ Vue.component('i-what', {
 
 const formsData = [
     {
+        formId: 'form0-log',
+        label: 'Login',
+        fields: [
+            {
+                type: 'text',
+                placeholder: "Username",
+                name: 'username',
+                autocomplete: 'pm-username',
+                value: 'maxzz',
+                dataFtype: -1
+            },
+            {
+                type: 'password',
+                placeholder: "Password",
+                name: 'password',
+                autocomplete: 'pm-password',
+                value: 'maxzz-pass',
+                dataFtype: -1
+            },
+        ]
+    },
+    {
         formId: 'formA-nn',
         label: 'Change: New+New',
         fields: [
@@ -141,12 +163,12 @@ Vue.component('test-form', {
 
         /*
         type Field = {
-            type: 'password' | 'hidden',
+            type: 'password' | 'hidden' | 'text',
             placeholder: string;
             name: 'password-current' | 'password-new' | 'password-confirm' | 'username';
             autocomplete: 'username' | 'new-password' | 'current-password';
             value?: string;
-            dataFtype: 0 | 1 | -1; // 0 = old | 1 = new | -1 = username
+            dataFtype: 0 | 1 | -1; // 0 = old | 1 = new | -1 = ignore (for username fields)
         }
         */
         const dataa = reactive({
@@ -154,7 +176,7 @@ Vue.component('test-form', {
             formLabel: '',
             loading: true,
 
-            fillin: [], // fill-values: 0 - old; 1 - new
+            dataFtypes: [], // fill-values: 0 - old; 1 - new
 
             watching: {
                 field_username: '',
@@ -169,17 +191,17 @@ Vue.component('test-form', {
             },
         });
 
-        function localStorageLoad() {
-            let cnt = localStorage.getItem(`${STORAGE_TESTFORM}-${dataa.formId}`);
-            let s = cnt && JSON.parse(cnt);
+        function loadStore() {
+            const cnt = localStorage.getItem(`${STORAGE_TESTFORM}-${dataa.formId}`);
+            const s = cnt && JSON.parse(cnt);
             if (s) {
                 dataa.watching.field_username = s.field_username;
                 dataa.watching.fields.map((_, index) => _.value = s.fields[index]),
                 dataa.watching.options = s.options;
             }
         }
-        function localStorageSave() {
-            let s = {
+        function saveStore() {
+            const s = {
                 field_username: dataa.watching.field_username,
                 fields: dataa.watching.fields.map(_ => _.value),
                 options: dataa.watching.options,
@@ -187,20 +209,7 @@ Vue.component('test-form', {
             localStorage.setItem(`${STORAGE_TESTFORM}-${dataa.formId}`, JSON.stringify(s));
         }
 
-        function fieldType(field) {
-            return field.type === 'hidden' ? 'hidden' : dataa.watching.options.showPsws ? 'text' : field.type;
-        }
-        function onFillValues() {
-            dataa.watching.fields.forEach((_, index) => {
-                if (dataa.fillin[index] >= 0) {
-                    let numb = dataa.fillin[index] + (dataa.watching.options.fillInvalid ? index : 0); // add index as shift to do invalid value
-                    _.value = `____ ${numb} ____`;
-                }
-            });
-        }
-        function onClearValues() {
-            dataa.watching.fields.forEach((_, index) => dataa.fillin[index] >= 0 && (_.value = ''));
-        }
+        watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : saveStore(), {deep: true});
 
         onMounted(() => {
             dataa.formId = props.formName;
@@ -211,13 +220,27 @@ Vue.component('test-form', {
     
             dataa.formLabel = org.label;
             dataa.watching.fields = org.fields;
-            dataa.fillin = org.fields.map(_ => _.dataFtype);
+            dataa.dataFtypes = org.fields.map(_ => _.dataFtype);
     
             dataa.loading = true;
-            localStorageLoad();
+            loadStore();
         });
 
-        watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : localStorageSave(), {deep: true});
+        function fieldType(field) {
+            return field.type === 'hidden' ? 'hidden' : dataa.watching.options.showPsws ? 'text' : field.type;
+        }
+        function onFillValues() {
+            const doValid = !dataa.watching.options.fillInvalid;
+            dataa.watching.fields.forEach((_, index) => {
+                if (dataa.dataFtypes[index] >= 0) {
+                    const numb = dataa.dataFtypes[index] + (doValid ? 0: index);
+                    _.value = `____ ${numb} ____`;
+                }
+            });
+        }
+        function onClearValues() {
+            dataa.watching.fields.forEach((_, index) => dataa.dataFtypes[index] >= 0 && (_.value = ''));
+        }
 
         return {
             ...toRefs(dataa),
@@ -242,7 +265,7 @@ Vue.component('data-forms', {
         });
 
         onMounted(() => {
-            function loadLocalStorage() {
+            function loadStore() {
                 data.loading = true;
                 let cnt = localStorage.getItem(STORAGE_CURRENT);
                 data.fields = parseFieldsFromString(cnt);
@@ -254,11 +277,16 @@ Vue.component('data-forms', {
                 data.vault = vault;
             }
 
-            loadLocalStorage();
+            loadStore();
             loadVault();
         });
 
-        watch(() => data.fields, () => data.loading ? (data.loading = false) : saveFieldsToLocalStorage(), { deep: true });
+        function saveStore() {
+            let cnt = JSON.stringify(data.fields);
+            localStorage.setItem(STORAGE_CURRENT, cnt);
+        }
+
+        watch(() => data.fields, () => data.loading ? (data.loading = false) : saveStore(), { deep: true });
 
         /* Fields */
         function parseFieldsFromString(cnt) {
@@ -269,10 +297,6 @@ Vue.component('data-forms', {
             }
             cnt.forEach(_ => _.idx = data.lastIndex++);
             return cnt;
-        }
-        function saveFieldsToLocalStorage() {
-            let cnt = JSON.stringify(data.fields);
-            localStorage.setItem(STORAGE_CURRENT, cnt);
         }
         function onAddField() {
             data.fields.push({
@@ -323,6 +347,7 @@ function main(ctx) {
     console.log('start');
 
     const userForms = ref([
+        'form0-log',
         'formA-nn',
         'formB-cn',
         'formC-cnn',
