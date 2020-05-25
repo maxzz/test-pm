@@ -47,21 +47,21 @@ const formsData = [
                 placeholder: "Password New",
                 name: 'password-new',
                 autocomplete: 'new-password',
-                'data-ftype': 1 // new
+                dataFtype: 1 // new
             },
             {
                 type: 'password',
                 placeholder: "Password Confirm",
                 name: 'password-confirm',
                 autocomplete: 'new-password',
-                'data-ftype': 1 // new
+                dataFtype: 1 // new
             },
             {
                 type: 'hidden',
                 name: 'username',
                 autocomplete: 'username',
                 value: 'maxzz',
-                'data-ftype': -1
+                dataFtype: -1
             },
         ]
     },
@@ -74,20 +74,21 @@ const formsData = [
                 placeholder: "Password Current",
                 name: 'password-current',
                 autocomplete: 'current-password',
-                'data-ftype': 0 // old
+                dataFtype: 0 // old
             },
             {
                 type: 'password',
                 placeholder: "Password New",
                 name: 'password-new',
                 autocomplete: 'new-password',
-                'data-ftype': 1 // new
+                dataFtype: 1 // new
             },
             {
                 type: 'hidden',
                 name: 'username',
+                autocomplete: 'username',
                 value: 'maxzz',
-                'data-ftype': -1
+                dataFtype: -1
             },
         ]
     },
@@ -100,27 +101,28 @@ const formsData = [
                 placeholder: "Password Current",
                 name: 'password-current', // <- always current
                 autocomplete: 'current-password',
-                'data-ftype': 0 // old
+                dataFtype: 0 // old
             },
             {
                 type: 'password',
                 placeholder: "Password New",
                 name: 'password-new',
                 autocomplete: 'new-password',
-                'data-ftype': 1 // new
+                dataFtype: 1 // new
             },
             {
                 type: 'password',
                 placeholder: "Password Confirm",
                 name: 'password-confirm',
                 autocomplete: 'new-password',
-                'data-ftype': 1 // new
+                dataFtype: 1 // new
             },
             {
                 type: 'hidden',
                 name: 'username',
+                autocomplete: 'username',
                 value: 'maxzz',
-                'data-ftype': -1
+                dataFtype: -1
             },
         ]
     },
@@ -136,14 +138,27 @@ Vue.component('test-form', {
     template: '#test-template',
     props: ['formName'],
     setup(props, ctx) {
+
+        /*
+        type Field = {
+            type: 'password' | 'hidden',
+            placeholder: string;
+            name: 'password-current' | 'password-new' | 'password-confirm' | 'username';
+            autocomplete: 'username' | 'new-password' | 'current-password';
+            value?: string;
+            dataFtype: 0 | 1 | -1; // 0 = old | 1 = new | -1 = username
+        }
+        */
         const dataa = reactive({
             formId: '',
             formLabel: '',
             loading: true,
 
+            fillin: [], // fill-values: 0 - old; 1 - new
+
             watching: {
                 field_username: '',
-                fields: [],
+                fields: [], // Field[]
 
                 options: {
                     hasUsername: false,
@@ -152,8 +167,6 @@ Vue.component('test-form', {
                     showPsws: false,
                 },
             },
-
-            fillin: [] // fill-values: 0 - old; 1 - new
         });
 
         function localStorageLoad() {
@@ -178,7 +191,11 @@ Vue.component('test-form', {
             return field.type === 'hidden' ? 'hidden' : dataa.watching.options.showPsws ? 'text' : field.type;
         }
         function onFillValues() {
-            dataa.watching.fields.forEach((_, index) => dataa.fillin[index] >= 0 && (_.value = `____ ${dataa.fillin[index] + (dataa.watching.options.fillInvalid ? index : 0)} ____`));
+            dataa.watching.fields.forEach((_, index) => {
+                if (dataa.fillin[index] >= 0) {
+                    (_.value = `____ ${dataa.fillin[index] + (dataa.watching.options.fillInvalid ? index : 0)} ____`)
+                }
+            });
         }
         function onClearValues() {
             dataa.watching.fields.forEach((_, index) => dataa.fillin[index] >= 0 && (_.value = ''));
@@ -193,7 +210,7 @@ Vue.component('test-form', {
     
             dataa.formLabel = org.label;
             dataa.watching.fields = org.fields;
-            dataa.fillin = org.fields.map(_ => _['data-ftype']);
+            dataa.fillin = org.fields.map(_ => _.dataFtype);
     
             dataa.loading = true;
             localStorageLoad();
