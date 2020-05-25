@@ -43,20 +43,12 @@ const formsData = [
         label: 'Login',
         fields: [
             {
-                type: 'text',
-                placeholder: "Username",
-                name: 'username',
-                autocomplete: 'pm-username',
-                value: 'maxzz',
-                dataFtype: -1
-            },
-            {
                 type: 'password',
                 placeholder: "Password",
                 name: 'password',
                 autocomplete: 'pm-password',
                 value: 'maxzz-pass',
-                dataFtype: -1
+                dataFtype: 0 // old
             },
         ]
     },
@@ -229,14 +221,19 @@ Vue.component('test-form', {
         function fieldType(field) {
             return field.type === 'hidden' ? 'hidden' : dataa.watching.options.showPsws ? 'text' : field.type;
         }
-        function onFillValues() {
-            const doValid = !dataa.watching.options.fillInvalid;
+        function fillValues(doValid) { // const doValid = !dataa.watching.options.fillInvalid;
             dataa.watching.fields.forEach((_, index) => {
                 if (dataa.dataFtypes[index] >= 0) {
                     const numb = dataa.dataFtypes[index] + (doValid ? 0: index);
                     _.value = `____ ${numb} ____`;
                 }
             });
+        }
+        function onFillWrongValues() {
+            fillValues(false);
+        }
+        function onFillRightValues() {
+            fillValues(true);
         }
         function onClearValues() {
             dataa.watching.fields.forEach((_, index) => dataa.dataFtypes[index] >= 0 && (_.value = ''));
@@ -245,7 +242,8 @@ Vue.component('test-form', {
         return {
             ...toRefs(dataa),
             fieldType,
-            onFillValues,
+            onFillWrongValues,
+            onFillRightValues,
             onClearValues,
         };
     }

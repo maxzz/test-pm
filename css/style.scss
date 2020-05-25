@@ -161,7 +161,8 @@ $input-height: 26px;
         align-content: start;
     
         button {
-            padding: .3em;
+            height: $input-height;
+            padding: 0 .3em;
             margin-bottom: $hspace;
         }
     }

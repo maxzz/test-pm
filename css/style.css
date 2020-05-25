@@ -139,7 +139,8 @@ body {
 }
 
 .user-form .uf_body_right button {
-  padding: .3em;
+  height: 26px;
+  padding: 0 .3em;
   margin-bottom: 0.2rem;
 }
 
