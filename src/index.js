@@ -203,15 +203,14 @@ Vue.component('test-form', {
         watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : saveStore(), {deep: true});
 
         onMounted(() => {
-            dataa.formId = props.formName;
+            const dt = formsData.find((_) => _.formId === props.formName);
 
-            let org = formsData.find((_) => _.formId === dataa.formId);
+            dt.fields.forEach(_ => !_.value && (_.value = '')); // create velue if skipped into definitions
 
-            org.fields.forEach(_ => !_.value && (_.value = ''));
-    
-            dataa.formLabel = org.label;
-            dataa.watching.fields = org.fields;
-            dataa.dataFtypes = org.fields.map(_ => _.dataFtype);
+            dataa.formId = dt.formId;
+            dataa.formLabel = dt.label;
+            dataa.watching.fields = dt.fields;
+            dataa.dataFtypes = dt.fields.map(_ => _.dataFtype);
     
             dataa.loading = true;
             loadStore();
