@@ -177,7 +177,6 @@ Vue.component('test-form', {
                 options: {
                     hasUsername: false,
                     hasLogin: true,
-                    fillInvalid: false,
                     showPsws: false,
                 },
             },
@@ -221,7 +220,7 @@ Vue.component('test-form', {
         function fieldType(field) {
             return field.type === 'hidden' ? 'hidden' : dataa.watching.options.showPsws ? 'text' : field.type;
         }
-        function fillValues(doValid) { // const doValid = !dataa.watching.options.fillInvalid;
+        function fillValues(doValid) {
             dataa.watching.fields.forEach((_, index) => {
                 if (dataa.dataFtypes[index] >= 0) {
                     const numb = dataa.dataFtypes[index] + (doValid ? 0: index);
