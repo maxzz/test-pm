@@ -193,7 +193,8 @@ Vue.component('test-form', {
         function onFillValues() {
             dataa.watching.fields.forEach((_, index) => {
                 if (dataa.fillin[index] >= 0) {
-                    (_.value = `____ ${dataa.fillin[index] + (dataa.watching.options.fillInvalid ? index : 0)} ____`)
+                    let numb = dataa.fillin[index] + (dataa.watching.options.fillInvalid ? index : 0); // add index as shift to do invalid value
+                    _.value = `____ ${numb} ____`;
                 }
             });
         }
