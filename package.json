@@ -1,10 +1,11 @@
 {
-  "name": "dp-test-password-change",
+  "name": "test-password-manager",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Max Zakharzhevskiy <max.za@digitalpersona.com>",
+  "author": "Max Zakharzhevskiy",
   "license": "MIT",
   "scripts": {
-      "build": "html-single"
+      "build": "html-single",
+      "deploy": "not ready: gh-pages -d dist"
   }
 }

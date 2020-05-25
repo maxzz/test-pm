@@ -1,22 +1,8 @@
+# Overview
 
-https://jsfiddle.net/tiagomatosweb/vqtnpyzw/ <- started with
-https://www.vuemastery.com/blog/vue-3-start-using-it-today/
+This application developed to test the Password Managers ability to handle different login / password change forms.
 
-TODO: Firefox is grabbing credentials when value is changed (has -> clear)
-
-```js
-[...$0.children].map((_) => _.value)
-
-// activated only when somebody asked
-    computed: {
-        allData: function() {
-            let q = this.opt_hasUsername;
-            let s = JSON.stringify(this.$data);
-            console.log(s + q);
-        }
-    },
-
-```
+![](src/assets/preview.png)
 
 # Google Design Docs
 
@@ -57,6 +43,26 @@ Note: As of version 45, the password manager is no longer integrated with Keycha
 
 Starting in OS X 10.9, Apple introduced the iCloud Keychain. This manifests itself as the “Local Items” keychain in Keychain Access. Items in this keychain are only accessible to applications with the keychain-access-groups entitlement [1][2]. This, like other iCloud entitlements, is “available only to apps submitted to the App Store or to the Mac App Store” [3].
 
+# Misc notes for Vue.js
+
+https://jsfiddle.net/tiagomatosweb/vqtnpyzw/ <- started with
+https://www.vuemastery.com/blog/vue-3-start-using-it-today/
+
+TODO: Firefox is grabbing credentials when value is changed (has -> clear)
+
+```js
+[...$0.children].map((_) => _.value)
+
+// activated only when somebody asked
+    computed: {
+        allData: function() {
+            let q = this.opt_hasUsername;
+            let s = JSON.stringify(this.$data);
+            console.log(s + q);
+        }
+    },
+
+```
 
 # Done
 

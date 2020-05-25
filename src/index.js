@@ -146,9 +146,12 @@ function setAttrs(el, attrs) {
     Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
 }
 
-const STORAGE_TESTFORM = 'd16-pchange-test-form';
+const STORAGE_USERFORM = 'd16-userform';
+const STORAGE_DATAFORM = 'd16-dataform';
+const STORAGE_VAULT = 'd16-vault';
+const STORAGE_SHOWFORMS = 'd16-showforms';
 
-Vue.component('test-form', {
+Vue.component('user-form', {
     template: '#test-template',
     props: ['formName'],
     setup(props, ctx) {
@@ -184,7 +187,7 @@ Vue.component('test-form', {
         });
 
         function loadStore() {
-            const cnt = localStorage.getItem(`${STORAGE_TESTFORM}-${dataa.formId}`);
+            const cnt = localStorage.getItem(`${STORAGE_USERFORM}-${dataa.formId}`);
             const s = cnt && JSON.parse(cnt);
             if (s) {
                 dataa.watching.field_username = s.field_username;
@@ -198,7 +201,7 @@ Vue.component('test-form', {
                 fields: dataa.watching.fields.map(_ => _.value),
                 options: dataa.watching.options,
             };
-            localStorage.setItem(`${STORAGE_TESTFORM}-${dataa.formId}`, JSON.stringify(s));
+            localStorage.setItem(`${STORAGE_USERFORM}-${dataa.formId}`, JSON.stringify(s));
         }
 
         watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : saveStore(), {deep: true});
@@ -249,13 +252,10 @@ Vue.component('test-form', {
     }
 });
 
-const STORAGE_CURRENT = 'd16-pchange-data';
-const STORAGE_VAULT = 'd16-pchange-vault';
-
 Vue.component('data-forms', {
     template: '#data-forms',
     props: ['userForms'],
-    setup(props, ctx) {
+    setup() {
         const data = reactive({
             lastIndex: 10,
             loading: true,
@@ -266,7 +266,7 @@ Vue.component('data-forms', {
         onMounted(() => {
             function loadStore() {
                 data.loading = true;
-                let cnt = localStorage.getItem(STORAGE_CURRENT);
+                let cnt = localStorage.getItem(STORAGE_DATAFORM);
                 data.fields = parseFieldsFromString(cnt);
             }
             function loadVault() {
@@ -282,7 +282,10 @@ Vue.component('data-forms', {
 
         function saveStore() {
             let cnt = JSON.stringify(data.fields);
-            localStorage.setItem(STORAGE_CURRENT, cnt);
+            localStorage.setItem(STORAGE_DATAFORM, cnt);
+        }
+        function saveVault() {
+            localStorage.setItem(STORAGE_VAULT, JSON.stringify(data.vault));
         }
 
         watch(() => data.fields, () => data.loading ? (data.loading = false) : saveStore(), { deep: true });
@@ -319,10 +322,11 @@ Vue.component('data-forms', {
                 data: JSON.stringify(data.fields),
                 idx: data.lastIndex++,
             }, ...data.vault];
-            localStorage.setItem(STORAGE_VAULT, JSON.stringify(data.vault));
+            saveVault();
         }
         function onDelFromVault(idx) {
             data.vault = data.vault.filter(_ => _.idx !== idx);
+            saveVault();
         }
         function onSetFieldsFromVault(str) {
             data.fields = parseFieldsFromString(str);
@@ -345,34 +349,39 @@ Vue.component('data-forms', {
 Vue.component('forms-selector', {
     template: '#forms-selector',
     props: ['userForms'],
-    setup() {
+    setup(props) {
+        let loading = true;
+
+        function saveStore() {
+            console.log('checks');
+        }
+        
+        watch(() => props.userForms, () => loading ? (loading = false) : saveStore(), {deep: true});
         return {};
     }
 });
 
 function main(ctx) {
-    console.log('start');
-
     const userForms = ref([
         {
             name: 'form0-log',
             disp: 'Login',
-            show: false
+            show: false,
         },
         {
             name: 'formA-nn',
             disp: 'Change password: New+New',
-            show: true
+            show: true,
         },
         {
             name: 'formB-cn',
             disp: 'Change password: Cur+New',
-            show: true
+            show: true,
         },
         {
             name: 'formC-cnn',
             disp: 'Change password: Cur+New+New',
-            show: true
+            show: true,
         },
     ]);
 
