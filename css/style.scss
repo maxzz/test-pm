@@ -31,7 +31,7 @@ $form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 $data-form-bkg: #a7f2ff63;
 $input-height: 26px;
 
-.app {
+#app {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: $space * 1.4;

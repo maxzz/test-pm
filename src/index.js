@@ -37,8 +37,9 @@ Vue.component('i-what', {
     props: ['psw']
 });
 
-const formsData = {
-    'formA-nn': {
+const formsData = [
+    {
+        formId: 'formA-nn',
         label: 'Change: New+New',
         fields: [
             {
@@ -64,7 +65,8 @@ const formsData = {
             },
         ]
     },
-    'formB-cn': {
+    {
+        formId: 'formB-cn',
         label: 'Change: Cur+New',
         fields: [
             {
@@ -89,7 +91,8 @@ const formsData = {
             },
         ]
     },
-    'formC-cnn': {
+    {
+        formId: 'formC-cnn',
         label: 'Change Cur+New+New',
         fields: [
             {
@@ -121,7 +124,7 @@ const formsData = {
             },
         ]
     },
-};
+];
 
 function setAttrs(el, attrs) {
     Object.keys(attrs).forEach(_ => el.setAttribute(_, attrs[_]));
@@ -131,6 +134,7 @@ const STORAGE_TESTFORM = 'd16-pchange-test-form';
 
 Vue.component('test-form', {
     template: '#test-template',
+    props: ['formName'],
     setup(props, ctx) {
         const dataa = reactive({
             formId: '',
@@ -152,7 +156,7 @@ Vue.component('test-form', {
             fillin: [] // fill-values: 0 - old; 1 - new
         });
 
-        const formRef = ref(null);
+        // const formRef = ref(null);
 
         function localStorageLoad() {
             let cnt = localStorage.getItem(`${STORAGE_TESTFORM}-${dataa.formId}`);
@@ -183,9 +187,12 @@ Vue.component('test-form', {
         }
 
         onMounted(() => {
-            dataa.formId = formRef.value.dataset['formId'];
+            // dataa.formId = formRef.value.dataset['formId'];
+            dataa.formId = props.formName;
 
-            let org = formsData[dataa.formId];
+            // let org = formsData[dataa.formId];
+            let org = formsData.find((_) => _.formId === dataa.formId);
+
             org.fields.forEach(_ => !_.value && (_.value = ''));
     
             dataa.formLabel = org.label;
@@ -199,7 +206,7 @@ Vue.component('test-form', {
         watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : localStorageSave(), {deep: true});
 
         return {
-            formRef,
+            // formRef,
             ...toRefs(dataa),
             fieldType,
             onFillValues,
@@ -299,11 +306,24 @@ Vue.component('data-forms', {
     }
 });
 
+function main(ctx) {
+    console.log('start');
+
+    const userForms = ref([
+        'formA-nn',
+        'formB-cn',
+        'formC-cnn',
+    ]);
+
+    return {
+        userForms,
+    };
+}
+
 var vm = new Vue({
     el: '#app',
-    setup() {
-        console.log('start');
-        return {};
+    setup(ctx) {
+        return main(ctx);
     }
 });
 
