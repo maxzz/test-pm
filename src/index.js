@@ -349,6 +349,7 @@ Vue.component('data-forms', {
 Vue.component('forms-selector', {
     template: '#forms-selector',
     props: ['userForms'],
+    /*
     setup(props) {
         let loading = true;
 
@@ -359,31 +360,59 @@ Vue.component('forms-selector', {
         watch(() => props.userForms, () => loading ? (loading = false) : saveStore(), {deep: true});
         return {};
     }
+    */
 });
 
-function main(ctx) {
-    const userForms = ref([
-        {
-            name: 'form0-log',
-            disp: 'Login',
-            show: false,
-        },
-        {
-            name: 'formA-nn',
-            disp: 'Change password: New+New',
-            show: true,
-        },
-        {
-            name: 'formB-cn',
-            disp: 'Change password: Cur+New',
-            show: true,
-        },
-        {
-            name: 'formC-cnn',
-            disp: 'Change password: Cur+New+New',
-            show: true,
-        },
-    ]);
+function main() {
+    const userForms = ref([]);
+
+    onMounted(() => {
+        userForms.value = [
+            {
+                name: 'form0-log',
+                disp: 'Login',
+                show: false,
+            },
+            {
+                name: 'formA-nn',
+                disp: 'Change password: New+New',
+                show: true,
+            },
+            {
+                name: 'formB-cn',
+                disp: 'Change password: Cur+New',
+                show: true,
+            },
+            {
+                name: 'formC-cnn',
+                disp: 'Change password: Cur+New+New',
+                show: true,
+            },
+        ];
+        loadStore();
+    });
+
+    let loading = true;
+    watch(userForms, () => loading ? (loading = false) : saveStore(), {deep: true});
+
+    function loadStore() {
+        const storage = localStorage.getItem(STORAGE_SHOWFORMS);
+        const stored = storage && JSON.parse(storage);
+        if (stored) {
+            const current = new Map(userForms.value.map(_ => [_.name, _]));
+            stored.forEach(_ => {
+                let currentItem = current.get(_[0]);
+                if (currentItem) {
+                    currentItem.show = !!_[1];
+                }
+            });
+        }
+    }
+
+    function saveStore() {
+        const map = JSON.stringify(userForms.value.map((_) => [_.name, +_.show]));
+        localStorage.setItem(STORAGE_SHOWFORMS, map);
+    }
 
     return {
         userForms,
