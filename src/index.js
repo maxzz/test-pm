@@ -341,14 +341,37 @@ Vue.component('data-forms', {
     }
 });
 
+Vue.component('forms-selector', {
+    template: '#forms-selector',
+    setup() {
+        return {};
+    }
+});
+
 function main(ctx) {
     console.log('start');
 
     const userForms = ref([
-        'form0-log',
-        'formA-nn',
-        'formB-cn',
-        'formC-cnn',
+        {
+            name: 'form0-log',
+            disp: 'Login',
+            show: false
+        },
+        {
+            name: 'formA-nn',
+            disp: 'Change password: New+New',
+            show: true
+        },
+        {
+            name: 'formB-cn',
+            disp: 'Change password: Cur+New',
+            show: true
+        },
+        {
+            name: 'formC-cnn',
+            disp: 'Change password: Cur+New+New',
+            show: true
+        },
     ]);
 
     return {

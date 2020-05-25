@@ -326,4 +326,20 @@ $input-height: 26px;
     }
 }
 
+.forms-selector {
+    .uf_options {
+        margin-top: $space;
+        padding-top: $hspace;
+    
+        label {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: $space;
+            align-items: center;
+            font-size: .75rem;
+            user-select: none;
+        }
+    }
+}
+
 /* Done */
