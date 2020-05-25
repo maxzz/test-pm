@@ -21,7 +21,7 @@ body {
   stroke-width: .7;
 }
 
-#app {
+.app {
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 0.56rem;
@@ -30,11 +30,11 @@ body {
   max-width: 570px;
 }
 
-#app .user-forms .user-form:not(:first-child) {
+.app .user-forms .user-form:not(:first-child) {
   margin-top: 1.8rem;
 }
 
-#app .data-forms {
+.app .data-forms {
   position: relative;
   padding: 0.4rem 0.8rem;
   border: 1px dotted gray;
