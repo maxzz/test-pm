@@ -166,6 +166,7 @@ Vue.component('test-form', {
         const dataa = reactive({
             formId: '',
             formLabel: '',
+            formLogin: false, // to hide the password change specific controls
             loading: true,
 
             dataFtypes: [], // fill-values: 0 - old; 1 - new
@@ -211,6 +212,7 @@ Vue.component('test-form', {
             dataa.formLabel = dt.label;
             dataa.watching.fields = dt.fields;
             dataa.dataFtypes = dt.fields.map(_ => _.dataFtype);
+            dataa.formLogin = dt.fields.length === 1;
     
             dataa.loading = true;
             loadStore();
