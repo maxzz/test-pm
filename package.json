@@ -5,7 +5,8 @@
   "author": "Max Zakharzhevskiy",
   "license": "MIT",
   "scripts": {
-      "build": "html-single",
-      "deploy": "not ready: gh-pages -d dist"
-  }
+    "build": "html-single",
+    "deploy": "not ready: gh-pages -d dist"
+  },
+  "dependencies": {}
 }
