@@ -26,12 +26,14 @@ $hspace: $space / 2;
 $caption-bdr: #959595;
 $caption-bkg: #effffb;
 $form-bkg: #f8f8f8;
-$form-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+$form-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 
 $data-form-bkg: #a7f2ff63;
+$data-form-bkg-solid: #74bcdc; // yarn: #2188b6
+$data-form-bkg-semi: #74bcdc8c; // yarn: #2188b6
 $input-height: 26px;
 
-#app {
+.app {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: $space * 1.4;
@@ -116,6 +118,20 @@ $input-height: 26px;
         font-size: .75rem;
         user-select: none;
     }
+}
+
+/* App header */
+
+header {
+    margin-bottom: .4rem;
+    padding: 1rem;
+    padding-left: 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 100;
+    color: white;
+    background-color: $data-form-bkg-semi;
+    text-shadow: 2px 3px darken($data-form-bkg-solid, 5%); //text-shadow: 2px 3px 4px darken($data-form-bkg-solid, 5%);
+    box-shadow: $form-shadow;
 }
 
 /* USER FORMS */
