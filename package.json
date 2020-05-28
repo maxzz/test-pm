@@ -1,6 +1,7 @@
 {
   "name": "test-password-manager",
   "version": "1.0.0",
+  "description": "Dynamic webpage to test Password Manager login and password change screens",
   "main": "index.js",
   "author": "Max Zakharzhevskiy",
   "license": "MIT",
