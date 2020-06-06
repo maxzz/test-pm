@@ -156,10 +156,10 @@ header {
             margin-bottom: $hspace;
         }
     
-        .uf-fields {
-            display: grid;
-            row-gap: .2em;
-        }
+        // .uf-fields {
+        //     display: grid;
+        //     row-gap: .2em;
+        // }
 
         $input-usr-bkg: #f7fdf7;
         $input-psw-bkg: #fefaff;
@@ -167,6 +167,7 @@ header {
         input[type=text], input[type=password] {
             height: $input-height;
             max-width: $field-width;
+            margin-bottom: $hspace;
             padding: $hspace;
             font-size: .7rem;
             background-color: $input-psw-bkg;
