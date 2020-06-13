@@ -225,6 +225,9 @@ Vue.component('user-form', {
             return field.type === 'hidden' ? 'hidden' : dataa.watching.options.showPsws ? 'text' : field.type;
         }
         function fillValues(doValid) {
+            if (isLoginForm()) {
+                dataa.watching.field_username = '123';
+            }
             dataa.watching.fields.forEach((_, index) => {
                 if (dataa.dataFtypes[index] >= 0) {
                     const numb = dataa.dataFtypes[index] + (doValid ? 0: index);
@@ -239,7 +242,13 @@ Vue.component('user-form', {
             fillValues(true);
         }
         function onClearValues() {
+            if (isLoginForm()) {
+                dataa.watching.field_username = '';
+            }
             dataa.watching.fields.forEach((_, index) => dataa.dataFtypes[index] >= 0 && (_.value = ''));
+        }
+        function isLoginForm() {
+            return dataa.watching.fields.length === 1 && dataa.watching.fields[0].dataFtype === 0; // i.e. single old password.
         }
 
         return {
