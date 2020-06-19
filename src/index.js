@@ -53,6 +53,28 @@ const formsData = [
         ]
     },
     {
+        formId: 'form0-log-abc',
+        label: 'Login a+user+b+pass+c+btn',
+        fields: [
+            {
+                type: 'text',
+                placeholder: "Second ID",
+                name: 'username2',
+                autocomplete: 'pm-username2',
+                value: 'pin code',
+                dataFtype: -1 // not a password
+            },
+            {
+                type: 'password',
+                placeholder: "Password",
+                name: 'password',
+                autocomplete: 'pm-password',
+                value: 'maxzz-pass',
+                dataFtype: 0 // old
+            },
+        ]
+    },
+    {
         formId: 'formA-nn',
         label: 'Change: New+New',
         fields: [
@@ -375,6 +397,11 @@ function main() {
             {
                 name: 'form0-log',
                 disp: 'Login',
+                show: false,
+            },
+            {
+                name: 'form0-log-abc',
+                disp: 'Login a+user+b+pass+c+btn',
                 show: false,
             },
             {

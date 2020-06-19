@@ -170,13 +170,16 @@ header {
             margin-bottom: $hspace;
             padding: $hspace;
             font-size: .7rem;
-            background-color: $input-psw-bkg;
             border: 1px solid $caption-bdr;
             border-radius: 3px;
 
             &::placeholder {
                 font-size: .7rem;
             }
+        }
+
+        input[type=password] {
+            background-color: $input-psw-bkg;
         }
 
         input[type=text].username {

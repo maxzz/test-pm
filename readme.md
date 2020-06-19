@@ -64,5 +64,8 @@ TODO: Firefox is grabbing credentials when value is changed (has -> clear)
 
 ```
 
-# Done
+## Development
 
+This applications is not using any bundlers (jsut for fun because we can). Just open with `Live Server` on `testcase16-password-change.html` and run `Watch Sass` VSCode extension.
+
+# Done
