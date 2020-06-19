@@ -37,130 +37,165 @@ Vue.component('i-what', {
     props: ['psw']
 });
 
-const formsData = [
+const FORMSDATA = [
     {
-        formId: 'form0-log',
-        label: 'Login',
-        fields: [
-            {
-                type: 'password',
-                placeholder: "Password",
-                name: 'password',
-                autocomplete: 'pm-password',
-                value: 'maxzz-pass',
-                dataFtype: 0 // old
-            },
-        ]
+        formDef: {
+            formId: 'form0-log',
+            label: 'Login',
+            fields: [
+                {
+                    type: 'password',
+                    placeholder: "Password",
+                    name: 'password',
+                    autocomplete: 'pm-password',
+                    value: 'maxzz-pass',
+                    dataFtype: 0 // old
+                },
+            ]
+        },
+        checkboxes: {
+            name: 'form0-log',
+            disp: 'Login',
+            show: false,
+        },
     },
     {
-        formId: 'form0-log-abc',
-        label: 'Login a+user+b+pass+c+btn',
-        fields: [
-            {
-                type: 'text',
-                placeholder: "Second ID",
-                name: 'username2',
-                autocomplete: 'pm-username2',
-                value: 'pin code',
-                dataFtype: -1 // not a password
-            },
-            {
-                type: 'password',
-                placeholder: "Password",
-                name: 'password',
-                autocomplete: 'pm-password',
-                value: 'maxzz-pass',
-                dataFtype: 0 // old
-            },
-        ]
+        formDef: {
+            formId: 'form0-log-abc',
+            label: 'Login a+user+b+pass+c+btn',
+            fields: [
+                {
+                    type: 'text',
+                    placeholder: "Second ID",
+                    name: 'username2',
+                    autocomplete: 'pm-username2',
+                    value: 'pin code',
+                    dataFtype: -1 // not a password
+                },
+                {
+                    type: 'password',
+                    placeholder: "Password",
+                    name: 'password',
+                    autocomplete: 'pm-password',
+                    value: 'maxzz-pass',
+                    dataFtype: 0 // old
+                },
+            ]
+        },
+        checkboxes: {
+            name: 'form0-log-abc',
+            disp: 'Login a+user+b+pass+c+btn',
+            show: false,
+        },
     },
     {
-        formId: 'formA-nn',
-        label: 'Change: New+New',
-        fields: [
-            {
-                type: 'password',
-                placeholder: "Password New",
-                name: 'password-new',
-                autocomplete: 'new-password',
-                dataFtype: 1 // new
-            },
-            {
-                type: 'password',
-                placeholder: "Password Confirm",
-                name: 'password-confirm',
-                autocomplete: 'new-password',
-                dataFtype: 1 // new
-            },
-            {
-                type: 'hidden',
-                name: 'username',
-                autocomplete: 'username',
-                value: 'maxzz',
-                dataFtype: -1
-            },
-        ]
+        formDef: {
+            formId: 'formA-nn',
+            label: 'Change: New+New',
+            fields: [
+                {
+                    type: 'password',
+                    placeholder: "Password New",
+                    name: 'password-new',
+                    autocomplete: 'new-password',
+                    dataFtype: 1 // new
+                },
+                {
+                    type: 'password',
+                    placeholder: "Password Confirm",
+                    name: 'password-confirm',
+                    autocomplete: 'new-password',
+                    dataFtype: 1 // new
+                },
+                {
+                    type: 'hidden',
+                    name: 'username',
+                    autocomplete: 'username',
+                    value: 'maxzz',
+                    dataFtype: -1
+                },
+            ]
+        },
+        checkboxes: {
+            name: 'formA-nn',
+            disp: 'Change password: New+New',
+            show: true,
+        },
     },
     {
-        formId: 'formB-cn',
-        label: 'Change: Cur+New',
-        fields: [
-            {
-                type: 'password',
-                placeholder: "Password Current",
-                name: 'password-current',
-                autocomplete: 'current-password',
-                dataFtype: 0 // old
-            },
-            {
-                type: 'password',
-                placeholder: "Password New",
-                name: 'password-new',
-                autocomplete: 'new-password',
-                dataFtype: 1 // new
-            },
-            {
-                type: 'hidden',
-                name: 'username',
-                autocomplete: 'username',
-                value: 'maxzz',
-                dataFtype: -1
-            },
-        ]
+        formDef: {
+            formId: 'formB-cn',
+            label: 'Change: Cur+New',
+            fields: [
+                {
+                    type: 'password',
+                    placeholder: "Password Current",
+                    name: 'password-current',
+                    autocomplete: 'current-password',
+                    dataFtype: 0 // old
+                },
+                {
+                    type: 'password',
+                    placeholder: "Password New",
+                    name: 'password-new',
+                    autocomplete: 'new-password',
+                    dataFtype: 1 // new
+                },
+                {
+                    type: 'hidden',
+                    name: 'username',
+                    autocomplete: 'username',
+                    value: 'maxzz',
+                    dataFtype: -1
+                },
+            ]
+        },
+        checkboxes: {
+            name: 'formB-cn',
+            disp: 'Change password: Cur+New',
+            show: true,
+        },
     },
     {
-        formId: 'formC-cnn',
-        label: 'Change Cur+New+New',
-        fields: [
-            {
-                type: 'password',
-                placeholder: "Password Current",
-                name: 'password-current', // <- always current
-                autocomplete: 'current-password',
-                dataFtype: 0 // old
-            },
-            {
-                type: 'password',
-                placeholder: "Password New",
-                name: 'password-new',
-                autocomplete: 'new-password',
-                dataFtype: 1 // new
-            },
-            {
-                type: 'password',
-                placeholder: "Password Confirm",
-                name: 'password-confirm',
-                autocomplete: 'new-password',
-                dataFtype: 1 // new
-            },
-            {
-                type: 'hidden',
-                name: 'username',
-                autocomplete: 'username',
-                value: 'maxzz',
-                dataFtype: -1
-            },
-        ]
+        formDef: {
+            formId: 'formC-cnn',
+            label: 'Change Cur+New+New',
+            fields: [
+                {
+                    type: 'password',
+                    placeholder: "Password Current",
+                    name: 'password-current', // <- always current
+                    autocomplete: 'current-password',
+                    dataFtype: 0 // old
+                },
+                {
+                    type: 'password',
+                    placeholder: "Password New",
+                    name: 'password-new',
+                    autocomplete: 'new-password',
+                    dataFtype: 1 // new
+                },
+                {
+                    type: 'password',
+                    placeholder: "Password Confirm",
+                    name: 'password-confirm',
+                    autocomplete: 'new-password',
+                    dataFtype: 1 // new
+                },
+                {
+                    type: 'hidden',
+                    name: 'username',
+                    autocomplete: 'username',
+                    value: 'maxzz',
+                    dataFtype: -1
+                },
+            ]
+        },
+        checkboxes: {
+            name: 'formC-cnn',
+            disp: 'Change password: Cur+New+New',
+            show: true,
+        },
     },
 ];
 
@@ -229,7 +264,7 @@ Vue.component('user-form', {
         watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : saveStore(), {deep: true});
 
         onMounted(() => {
-            const dt = formsData.find((_) => _.formId === props.formName);
+            const dt = FORMSDATA.find((_) => _.formDef.formId === props.formName).formDef;
 
             dt.fields.forEach(_ => !_.value && (_.value = '')); // create velue if skipped into definitions
 
@@ -393,33 +428,7 @@ function main() {
     const userForms = ref([]);
 
     onMounted(() => {
-        userForms.value = [
-            {
-                name: 'form0-log',
-                disp: 'Login',
-                show: false,
-            },
-            {
-                name: 'form0-log-abc',
-                disp: 'Login a+user+b+pass+c+btn',
-                show: false,
-            },
-            {
-                name: 'formA-nn',
-                disp: 'Change password: New+New',
-                show: true,
-            },
-            {
-                name: 'formB-cn',
-                disp: 'Change password: Cur+New',
-                show: true,
-            },
-            {
-                name: 'formC-cnn',
-                disp: 'Change password: Cur+New+New',
-                show: true,
-            },
-        ];
+        userForms.value = FORMSDATA.map(_ => _.checkboxes);
         loadStore();
     });
 

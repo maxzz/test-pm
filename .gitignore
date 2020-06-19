@@ -2,3 +2,5 @@ node_modules
 testcase016-password-change--single.html
 dist
 .cache
+css/*.css
+css/*.css.map
