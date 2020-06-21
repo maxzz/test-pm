@@ -1,6 +1,6 @@
 # Overview
 
-This application developed to test the Password Managers ability to handle different login / password change forms.
+This application developed to test the Password Managers ability to handle different login / password change forms. The webpage created as a single HTML file that embed all resources so the file can be easily placed anywhere.
 
 ![](src/assets/preview.png)
 
