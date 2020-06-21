@@ -1,5 +1,6 @@
+Vue.config.productionTip = false;
 Vue.use(window.vueCompositionApi.default);
-const { ref, reactive, toRefs, onMounted, watch } = window.vueCompositionApi;
+const { ref, reactive, computed, toRefs, onMounted, watch } = window.vueCompositionApi;
 
 Vue.component('child', {
     template: `
@@ -51,7 +52,9 @@ const FORMSDATA = [
                     value: 'maxzz-pass',
                     dataFtype: 0 // old
                 },
-            ]
+            ],
+            formLogin: true,
+            randomizeIds: true,
         },
         checkboxes: {
             name: 'form0-log',
@@ -80,7 +83,9 @@ const FORMSDATA = [
                     value: 'maxzz-pass',
                     dataFtype: 0 // old
                 },
-            ]
+            ],
+            formLogin: true,
+            randomizeIds: true,
         },
         checkboxes: {
             name: 'form0-log-abc',
@@ -227,6 +232,7 @@ Vue.component('user-form', {
             formId: '',
             formLabel: '',
             formLogin: false, // to hide the password change specific controls
+            randomizeIds: false,
             loading: true,
 
             dataFtypes: [], // fill-values: 0 - old; 1 - new
@@ -237,7 +243,7 @@ Vue.component('user-form', {
 
                 options: {
                     hasUsername: false,
-                    hasLogin: true,
+                    hasLogin: true, // hasLogin for password change or randomize for logins
                     showPsws: false,
                 },
             },
@@ -250,6 +256,8 @@ Vue.component('user-form', {
                 dataa.watching.field_username = s.field_username;
                 dataa.watching.fields.map((_, index) => _.value = s.fields[index]),
                 dataa.watching.options = s.options;
+
+                randomizeIDs(dataa.watching.fields, dataa.watching.options.hasLogin);
             }
         }
         function saveStore() {
@@ -263,16 +271,24 @@ Vue.component('user-form', {
 
         watch(() => dataa.watching, () => dataa.loading ? (dataa.loading = false) : saveStore(), {deep: true});
 
+        function randomizeIDs(fields, makeRandom) {
+            const randomInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+            let seed = randomInt(100000, 1000000);
+            fields.forEach(_ => _.domid = makeRandom ? `${_.name}_random_${seed}` : _.name); // add random field IDs or names
+        }
+
         onMounted(() => {
             const dt = FORMSDATA.find((_) => _.formDef.formId === props.formName).formDef;
 
             dt.fields.forEach(_ => !_.value && (_.value = '')); // create velue if skipped into definitions
+            randomizeIDs(dt.fields, false); // so far we don't know stored state
 
             dataa.formId = dt.formId;
             dataa.formLabel = dt.label;
             dataa.watching.fields = dt.fields;
             dataa.dataFtypes = dt.fields.map(_ => _.dataFtype);
-            dataa.formLogin = dt.fields.length === 1;
+            dataa.formLogin = !!dt.formLogin; //dt.fields.length === 1;
+            dataa.randomizeIds = !!dt.randomizeIds;
     
             dataa.loading = true;
             loadStore();
@@ -302,6 +318,14 @@ Vue.component('user-form', {
             dataa.watching.field_username = '';
             dataa.watching.fields.forEach((_, index) => dataa.dataFtypes[index] >= 0 && (_.value = ''));
         }
+        function onSecondClick(e) {
+            if (dataa.randomizeIds) {
+                let isChecked = e.target.checked; // reactive dataa.watching.options.hasLogin is not updated yet since we have two event handlers
+                randomizeIDs(dataa.watching.fields, isChecked);
+            }
+        }
+        const secondChkText = computed(() => dataa.randomizeIds ? 'Randomized IDs' :  'Has corresponding login');
+        const secondChkHint = computed(() => dataa.randomizeIds ? 'Randomize IDs on every check state changed and during loading' :  'Password change has corresponding login');
 
         return {
             ...toRefs(dataa),
@@ -309,6 +333,9 @@ Vue.component('user-form', {
             onFillWrongValues,
             onFillRightValues,
             onClearValues,
+            onSecondClick,
+            secondChkText,
+            secondChkHint,
         };
     }
 });
