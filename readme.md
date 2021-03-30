@@ -1,10 +1,10 @@
-# Overview
+## Overview
 
-This application developed to test the Password Managers ability to handle different login / password change forms. The webpage created as a single HTML file that embed all resources so the file can be easily placed anywhere.
+This application is designed to test the ability of password managers to handle various login / password forms and their changes. A web page created as a single HTML file with all the resources embedded in it, so the file can be easily placed anywhere.
 
 ![](src/assets/preview.png)
 
-# Google Design Docs
+### Google Design Docs
 
 [Create Amazing Password Forms](https://goo.gl/9p2vKq)
 
@@ -12,28 +12,28 @@ This application developed to test the Password Managers ability to handle diffe
 
 Fields that are not passwords, but should be obscured, such as credit card numbers, may also have a type="password" attribute, but should contain the relevant autocomplete attribute, such as "cc-number" or "cc-csc".
 
-## Examples: Password Form Styles that Chromium Understands
+#### Examples: Password Form Styles that Chromium Understands
 [Password Form Styles that Chromium Understands](https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands)
 
-## Autofill Examples
+#### Autofill Examples
 
 [Help users checkout faster with Autofill](https://developers.google.com/web/updates/2015/06/checkout-faster-with-autofill)
 
-## W3C Autocomplete
+### W3C Autocomplete
 
 [4.10.18.7.1 Autofilling form controls: the autocomplete attribute](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute)
 
 User agents sometimes have features for helping users fill forms in, for example prefilling the user's address based on earlier user input. The autocomplete content attribute can be used to hint to the user agent how to, or indeed whether to, provide such a feature.
 
-## Account Chooser and Email First
+#### Account Chooser and Email First
 
 [Email First](https://developers.google.com/identity/toolkit/web/account-chooser#email_first)
 
-## Password Generation
+#### Password Generation
 
 [Password Generation](https://www.chromium.org/developers/design-documents/password-generation)
 
-## OS X Password Manager/Keychain Integration
+#### OS X Password Manager/Keychain Integration
 
 [OS X Password Manager/Keychain Integration](https://www.chromium.org/developers/design-documents/os-x-password-manager-keychain-integration)
 
@@ -43,12 +43,12 @@ Note: As of version 45, the password manager is no longer integrated with Keycha
 
 Starting in OS X 10.9, Apple introduced the iCloud Keychain. This manifests itself as the “Local Items” keychain in Keychain Access. Items in this keychain are only accessible to applications with the keychain-access-groups entitlement [1][2]. This, like other iCloud entitlements, is “available only to apps submitted to the App Store or to the Mac App Store” [3].
 
-# Misc notes for Vue.js
+### Vue 3 notes
 
-https://jsfiddle.net/tiagomatosweb/vqtnpyzw/ <- started with
-https://www.vuemastery.com/blog/vue-3-start-using-it-today/
+[jsfiddle: \$emit and \$on events](https://jsfiddle.net/tiagomatosweb/vqtnpyzw/) <- started with
+[Vue 3: Start Using it Today](https://www.vuemastery.com/blog/vue-3-start-using-it-today/)
 
-TODO: Firefox is grabbing credentials when value is changed (has -> clear)
+* [ ] TODO: Firefox is grabbing credentials when value is changed (has -> clear)
 
 ```js
 [...$0.children].map((_) => _.value)
@@ -64,8 +64,10 @@ TODO: Firefox is grabbing credentials when value is changed (has -> clear)
 
 ```
 
-## Development
+### Development
 
-This applications is not using any bundlers (jsut for fun because we can). Just open with `Live Server` on `testcase16-password-change.html` and run `Watch Sass` VSCode extension.
+This application does not use any bundlers (just for fun, because we can). Just open the `Live Server` on `testcase16-password-change.html` and run the `Watch Sass` VSCode extension.
 
-# Done
+### Other test pages
+
+* [test-2](https://github.com/maxzz/test-pm)

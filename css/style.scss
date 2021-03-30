@@ -132,6 +132,20 @@ header {
     background-color: $data-form-bkg-semi;
     text-shadow: 2px 3px darken($data-form-bkg-solid, 5%); //text-shadow: 2px 3px 4px darken($data-form-bkg-solid, 5%);
     box-shadow: $form-shadow;
+
+    display: flex;
+    justify-content: space-between;
+
+    & svg {
+        width: 32px;
+        height: 32px;
+        stroke: #9bc0d1;
+        border: 1px solid #9bc0d1;
+        border-radius: 50%;
+        padding: .2rem;
+        padding-bottom: 0;
+        stroke-width: 1;
+    }
 }
 
 /* USER FORMS */
