@@ -125,8 +125,8 @@ header {
 header svg {
   width: 32px;
   height: 32px;
-  stroke: #9bc0d1;
-  border: 1px solid #9bc0d1;
+  stroke: white;
+  border: 1px solid white;
   border-radius: 50%;
   padding: .2rem;
   padding-bottom: 0;
@@ -446,11 +446,31 @@ header svg {
     <div id="app">
         <header>
             <div>Password Manager Tests</div>
-            <a href="https://github.com/maxzz/test-pm/#Other-test-pages" target="_blank">
-                <svg xmlns="http: //www.w3.org/2000/svg" width="16" hieght="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                </svg>            
-            </a>
+
+            <div style="display: flex">
+                <div style="margin-right: .5em; display: flex; align-items: center; text-shadow: none;">
+                    <!-- className="mr-2 flex space-x-2" -->
+
+                    <a href="/" style="text-decoration: none">
+                        <div style="padding: 0 .5rem; width: 1.5rem; height: 1.5rem; font-size: .75rem; line-height: 1rem; border: 1px solid white; color: white; border-radius: .25rem; display: grid; place-items: center;" title="Reload this page">
+                            <!-- className="px-2 mt-1 w-6 h-6 text-xs text-gray-100 border-gray-100 border rounded grid place-items-center"  -->
+                            1
+                        </div>
+                    </a>
+                    <a href="https://github.com/maxzz/test-pm" style="margin-left: .5rem; text-decoration: none">
+                        <div style="padding: 0 .5rem; width: 1.5rem; height: 1.5rem; font-size: .75rem; line-height: 1rem; border: 1px solid white; color: white; border-radius: .25rem; display: grid; place-items: center;" title="Open pm-test-second">
+                            <!-- className="px-2 mt-1 w-6 h-6 text-xs text-gray-100 border-gray-100 border rounded grid place-items-center" -->
+                            2
+                        </div>
+                    </a>
+                </div>
+
+                <a href="https://github.com/maxzz/test-pm/#Other-test-pages" target="_blank" title="Open GitHub source code">
+                    <svg xmlns="http: //www.w3.org/2000/svg" width="16" hieght="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+            </div>
         </header>
         <main class="app">
             <div class="user-forms">
