@@ -70,4 +70,5 @@ This application does not use any bundlers (just for fun, because we can). Just 
 
 ### Other test pages
 
-* [test-2](https://github.com/maxzz/test-pm)
+* [test-pm](https://github.com/maxzz/test-pm)
+* [test-pm-2](https://github.com/maxzz/test-pm-second)
