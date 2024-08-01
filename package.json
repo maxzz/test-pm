@@ -5,10 +5,10 @@
   "main": "index.js",
   "author": "Max Zakharzhevskiy",
   "license": "MIT",
+  "dependencies": {},
   "scripts": {
     "build": "rm -rf dist && gluehtml testcase016-password-change.html -r src/core/vue.js=src/core/vue.min.js -r src/core//vue-composition-api.umd.js=src/core//vue-composition-api.umd.min.js && mkdir dist && cp testcase016-password-change--single.html dist/index.html",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d dist"
-  },
-  "dependencies": {}
+  }
 }
